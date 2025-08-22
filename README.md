@@ -6,6 +6,6 @@
 ### Jairo Alonso Martinez Lopera
 
 ## Tecnologias
-Java, Springboot, Apache NetBeans
+Java, Springboot, Eclipse IDE
 
 
