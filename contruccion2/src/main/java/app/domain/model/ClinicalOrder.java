@@ -10,7 +10,7 @@ public abstract class ClinicalOrder {
     private Patient patient;       
     private User doctor;            
     private Date date;              
-    private OrderType orderType;            
+    private OrderType orderType;    
     
     private List<ItemOrder> items;
     

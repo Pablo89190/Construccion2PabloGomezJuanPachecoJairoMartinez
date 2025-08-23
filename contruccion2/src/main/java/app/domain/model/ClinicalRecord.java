@@ -24,33 +24,24 @@ public class ClinicalRecord {
         this.records = records;
     }
 
-	public void setDoctor(User doctor) {
-		// TODO Auto-generated method stub
-		
+	public void setDoctor(User doctor) {	
 	}
 
-	public void setClinicalOrder(ClinicalOrder clinicalOrder) {
-		// TODO Auto-generated method stub
-		
+	public void setClinicalOrder(ClinicalOrder clinicalOrder) {	
 	}
 
-	public void setPatient(Patient patient) {
-		// TODO Auto-generated method stub
-		
+	public void setPatient(Patient patient) {	
 	}
 
 	public User getDoctor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Patient getPatient() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public ClinicalOrder getClinicalOrder() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

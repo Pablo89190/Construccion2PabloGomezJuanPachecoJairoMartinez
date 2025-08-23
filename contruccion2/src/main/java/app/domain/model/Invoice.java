@@ -8,6 +8,7 @@ public class Invoice {
     private Insurance insurance;
     private List<InvoiceDetail> details;
     private double total;
+  
     
     public Invoice () {}
 
@@ -60,15 +61,17 @@ public class Invoice {
 	}
 
 	public void setOrder(ClinicalOrder clinicalOrder) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public ClinicalOrder getOrder() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-    
+	
+	public boolean isMedicineId() {
+		return false;
+		
+	}
 	
     
 }
