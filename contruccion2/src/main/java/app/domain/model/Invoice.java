@@ -58,6 +58,16 @@ public class Invoice {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+	public void setOrder(ClinicalOrder clinicalOrder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ClinicalOrder getOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 	
     

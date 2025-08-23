@@ -1,5 +1,9 @@
 package app.domain.ports;
 
-public class InvoicePort {
+import app.domain.model.Invoice;
+
+public interface InvoicePort {
+
+	public void save(Invoice invoice)throws Exception;
 
 }

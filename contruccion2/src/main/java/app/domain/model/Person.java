@@ -8,6 +8,7 @@ public class Person {
     private String phone;          
     private String email;
     
+    
     public Person() {}
     
 	public String getId() {
@@ -45,6 +46,7 @@ public class Person {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	
 	}
 
     

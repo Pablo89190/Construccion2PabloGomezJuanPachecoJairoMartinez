@@ -7,14 +7,14 @@ public class CreateUser {
 	
 	private UserPort userPort;
 	
-	public void createPerson(User user) throws Exception {
+	public void createUser(User user) throws Exception {
 		
 		if(userPort.findByUserName(user)!=null) {
-			throw new Exception (" Ya existe una persona con este Id");
+			throw new Exception (" Ya existe una persona con este Nombre de usuario");
 		}
 		
 	if (userPort.findByPassword(user)!=null) {
-		throw new Exception ("Ya existe una persona con este nombre ");
+		throw new Exception ("Ya existe una persona con esta contraseña");
 	  }
 	userPort.save(user);
 	  
