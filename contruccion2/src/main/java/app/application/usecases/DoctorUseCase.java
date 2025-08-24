@@ -14,9 +14,18 @@ public class DoctorUseCase {
 		createClinicalRecord.create(record);
 	}
 	
+<<<<<<< HEAD
 	//crear el services necesario para poder aplicar este fragmento
 	//public List<ClinicalRecord> searchRecords(Patient patient) throws Exception {
 		//return searchClinicalRecord.search(patient);
 	}
 
 	
+=======
+	//public List<ClinicalRecord> searchRecords(Patient patient) throws Exception {
+	//	return searchClinicalRecord.search(patient);
+	}
+	
+
+
+>>>>>>> a927a2e5c8e06e091f48b5505e174b60b84318c2
