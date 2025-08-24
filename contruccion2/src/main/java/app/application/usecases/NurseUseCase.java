@@ -12,8 +12,4 @@ public class NurseUseCase {
 		
 	}
 		
-<<<<<<< HEAD
-}  
-=======
-}  
->>>>>>> a927a2e5c8e06e091f48b5505e174b60b84318c2
+}
