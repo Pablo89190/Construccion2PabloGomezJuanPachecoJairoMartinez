@@ -1,16 +1,12 @@
 package app.domain.ports;
 
-import app.domain.model.Medicine;
+import app.domain.model.Patient;
 
-public interface MedicinePort {
-    
-    Medicine findByMedicineId(String medicineId);
-    
-    Medicine findByName(String name);
-    
-    void save(Medicine medicine);
-    
-    void update(Medicine medicine);
-    
-    void delete(Medicine medicine);
+
+public interface PatientPort {
+	
+	public Patient findById(Patient patient) throws Exception;
+	public Patient findByFullName(Patient patient) throws Exception;
+	
+	public void save(Patient patient) throws Exception;
 }
