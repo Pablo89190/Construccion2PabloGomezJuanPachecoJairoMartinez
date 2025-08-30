@@ -10,7 +10,7 @@ import app.domain.model.User;
 public class DoctorClient {
 
 	private static final String MENU = "Ingrese una opcion \n" + "1. Buscar historia clinica.\n"
-			+ "2. para crear mascota.\n" + "3. para cerrar sesion.";
+			+ "2. para crear paciente.\n" + "3. para cerrar sesion.";
 
 	private DoctorUseCase doctorUseCase;
 	private UserBuilder userBuilder;
