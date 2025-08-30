@@ -10,7 +10,7 @@ public class CreatePatient {
 	public void createPerson (Patient patient) throws Exception {
 		
 		
-		if(patientPort.findById(patient)!=null) { 
+		if(PatientPort.findById(patient)!=null) { 
 			throw new Exception ("Ya existe una persona con este documento");
 			
 		}

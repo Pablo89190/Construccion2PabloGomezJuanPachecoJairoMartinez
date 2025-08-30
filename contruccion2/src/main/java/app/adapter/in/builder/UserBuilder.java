@@ -8,12 +8,12 @@ public class UserBuilder {
 	private UserValidator userValidators;
 	
 	
-	public User build(String name, String document, String age, String userName, String password) throws Exception {
+	public User build(String name, String id, String age, String userName, String password) throws Exception {
 		User user = new User();
 		user.setFullName(userValidators.nameValidator(name));
-		user.setDocument(userValidators.documentValidator(document));
+		user.setId(userValidators.idValidator(id));
 		user.setAge(userValidators.ageValidator(age));
-		user.setUserName(userValidators.userNameValidator(userName));
+		user.setUsername(userValidators.userNameValidator(userName));
 		user.setPassword(userValidators.passwordValidator(password));
 		return user;
 	}

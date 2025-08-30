@@ -14,7 +14,7 @@ public class UserValidator extends SimpleValidators {
 		return stringValidator("contrasela", value);
 	}
 	
-	public long documentValidator(String value) throws Exception {
+	public long idValidator(String value) throws Exception {
 		return longValidator("el documento de la persona", value);
 	}
 	

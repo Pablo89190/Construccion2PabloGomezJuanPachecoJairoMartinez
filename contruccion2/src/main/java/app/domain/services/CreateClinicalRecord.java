@@ -12,14 +12,13 @@ import app.domain.ports.ClinicalOrderPort;
 
 public class CreateClinicalRecord {
 	
-	private PatientPort patientPort;
 	private UserPort userPort;
 	private ClinicalRecordPort clinicalRecordPort;
     private ClinicalOrderPort clinicalOrderPort;
 	
 	public void create(ClinicalRecord clinicalRecord) throws Exception {
 		
-		Patient patient = patientPort.findById(clinicalRecord.getPatient());
+		Patient patient = PatientPort.findById(clinicalRecord.getPatient());
 		if (patient== null) {
 			throw new Exception("La historia clinica debe tener un paciente");
 			

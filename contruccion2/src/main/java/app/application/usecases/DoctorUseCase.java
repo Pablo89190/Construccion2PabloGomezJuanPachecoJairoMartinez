@@ -5,6 +5,7 @@ import java.util.List;
 import app.domain.model.ClinicalRecord;
 import app.domain.model.Patient;
 import app.domain.services.CreateClinicalRecord;
+import app.domain.services.SearchClinicalRecordByPatient;
 
 public class DoctorUseCase {
 	
@@ -15,9 +16,8 @@ public class DoctorUseCase {
 	}
 	
 
-	//crear el services necesario para poder aplicar este fragmento
-	//public List<ClinicalRecord> searchRecords(Patient patient) throws Exception {
-		//return searchClinicalRecord.search(patient);
+	public List<ClinicalRecord> searchRecords(Patient patient) throws Exception {
+		return SearchClinicalRecordByPatient.search(patient);
 	}
 
-	
+}

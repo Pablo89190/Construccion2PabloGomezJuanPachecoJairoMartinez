@@ -9,12 +9,11 @@ import app.domain.ports.PatientPort;
 
 public class CreateInvoice {
 	
-	private PatientPort patientPort ;
 	private ClinicalOrderPort clinicalOrderPort;
 	private InvoicePort invoicePort;
 	
 	public void create(Invoice invoice) throws Exception {
-		Patient patient = patientPort.findById(invoice.getPatient());
+		Patient patient = PatientPort.findById(invoice.getPatient());
 		if(patient==null) {
 			throw new Exception("La factura debe tener un Paciente asociado");
 			

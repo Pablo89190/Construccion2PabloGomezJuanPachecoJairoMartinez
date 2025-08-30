@@ -3,14 +3,14 @@ package app.adapter.in.client;
 import java.util.Scanner;
 
 import app.adapter.in.builder.UserBuilder;
-import app.application.usecases.AdminUseCase;
+import app.application.usecases.HumanUseCase;
 import app.domain.model.User;
 
-public class AdminClient {
+public class HumanClient {
 
-	private static final String MENU = "Ingrese una de las opciones \n 1. para crear veterinario \n 2. para crear vendedor \n 3. para salir";
+	private static final String MENU = "Ingrese una de las opciones \n 1. Para crear Administrador \n 2. Para crear Soporte de informacion \n 3. Para crear Doctor \n 4. Para crear enfermera \n 5. salir ";
 	private static Scanner reader = new Scanner(System.in);
-	private AdminUseCase adminUseCase;
+	private HumanUseCase humanUseCase;
 	private UserBuilder userBuilder;
 
 	public void session() {
@@ -27,15 +27,25 @@ public class AdminClient {
 			switch (option) {
 			case "1": {
 				User user = readInfoFromUser();
-				adminUseCase.createVeterinarian(user);
+				humanUseCase.createAdmin(user);
 				return true;
 			}
 			case "2": {
 				User user = readInfoFromUser();
-				adminUseCase.createSeller(user);
+				humanUseCase.createSupport(user);
 				return true;
 			}
 			case "3": {
+				User user = readInfoFromUser();
+				humanUseCase.createDoctor(user);
+				return true;
+			}
+			case "4": {
+				User user = readInfoFromUser();
+				humanUseCase.createNurse(user);
+				return true;
+			}
+			case "5": {
 				System.out.println("hasta luego \n cerrando sesion");
 				return false;
 			}
@@ -55,14 +65,14 @@ public class AdminClient {
 		System.out.println("ingrese el nombre de la persona");
 		String name = reader.nextLine();
 		System.out.println("ingrese la cedula de la persona");
-		String document = reader.nextLine();
+		String id = reader.nextLine();
 		System.out.println("ingrese el nombre de de usuario");
 		String userName = reader.nextLine();
 		System.out.println("ingrese la contraseña");
 		String password = reader.nextLine();
 		System.out.println("ingrese la edad de la persona");
 		String age = reader.nextLine();
-		return userBuilder.build(name, document, age, userName, password);
+		return userBuilder.build(name, id, age, userName, password);
 		
 	}
 

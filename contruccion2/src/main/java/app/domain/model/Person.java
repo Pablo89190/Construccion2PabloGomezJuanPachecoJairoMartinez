@@ -1,20 +1,29 @@
 package app.domain.model;
 
 public class Person {
-    private String id;             
+    private long id;             
     private String fullName;
     private String birthDate;      
     private String address;
     private String phone;          
     private String email;
+    private int age;
     
     
-    public Person() {}
+    public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public Person() {}
     
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getFullName() {

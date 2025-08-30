@@ -11,7 +11,6 @@ import app.domain.ports.UserPort;
 public class CreateClinicalOrder {
 	
 	private UserPort userPort;
-	private PatientPort patientPort;
 	private ClinicalOrderPort clinicalOrderPort;
 
 	
@@ -20,7 +19,7 @@ public void create(ClinicalOrder clinicalOrder) throws Exception{
 		if (doctor ==null || !doctor.getRole().equals(Role.DOCTOR)) {
 			throw new Exception ("Las ordenes solo las pueden crear los Medicos");
 		}
-		Patient patient = patientPort.findById(clinicalOrder.getPatient());
+		Patient patient = PatientPort.findById(clinicalOrder.getPatient());
 		if (patient ==null) {
 			throw new Exception("Las ordernes se deben aplicar a Pacientes ya registrados");
 		}
