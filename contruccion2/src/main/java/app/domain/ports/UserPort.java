@@ -3,10 +3,12 @@ package app.domain.ports;
 import app.domain.model.User;
 
 public interface UserPort {
-	
-	public User findByUserName(User user) throws Exception ;
-	public User findByPassword (User user) throws Exception;
-	
-	public void save(User user) throws Exception; 
-
+    
+    User findByUserName(String username) throws Exception; 
+    
+    User findByPassword(String password) throws Exception; 
+    
+    void save(User user) throws Exception; 
+    
+    void delete(User user);
 }

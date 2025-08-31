@@ -7,18 +7,17 @@ public class CreatePatient {
 	
 	private PatientPort patientPort;
 
-	public void createPerson (Patient patient) throws Exception {
-		
-		
-		if(patientPort.findById(patient)!=null) { 
-			throw new Exception ("Ya existe una persona con este documento");
-			
+	public CreatePatient(PatientPort patientPort) {
+		this.patientPort = patientPort;
+	}
+
+	public void createPerson(Patient patient) throws Exception {
+		if (patientPort.findById(patient.getId()) != null) { 
+			throw new Exception("Ya existe una persona con este documento");
 		}
-		if (patientPort.findByFullName(patient)!=null) {
-			throw new Exception ("Ya existe una persona con este nombre");
-		  }
+		if (patientPort.findByFullName(patient.getFullName()) != null) {
+			throw new Exception("Ya existe una persona con este nombre");
+		}
 		patientPort.save(patient);
 	}
-	
-
 }

@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import app.domain.model.emuns.OrderType;
@@ -9,7 +9,7 @@ public abstract class ClinicalOrder {
     private long id;                
     private Patient patient;       
     private User doctor;            
-    private Date date;              
+    private LocalDate date;              
     private OrderType orderType;    
     
     private List<ItemOrder> items;
@@ -40,11 +40,11 @@ public abstract class ClinicalOrder {
 		this.doctor = doctor;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -63,9 +63,4 @@ public abstract class ClinicalOrder {
 	public void setItems(List<ItemOrder> items) {
 		this.items = items;
 	}
-    
-
-
-   
 }
-
