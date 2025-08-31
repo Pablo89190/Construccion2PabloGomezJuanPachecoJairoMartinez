@@ -15,35 +15,6 @@ public class DoctorUseCase {
     private CreateClinicalRecord createClinicalRecord;
     private CreateDiagnosticOrder createDiagnosticOrder;
     private SearchClinicalRecordByPatient searchClinicalRecordByPatient;
-<<<<<<< HEAD
-
-    public DoctorUseCase(CreateClinicalOrder createClinicalOrder,
-                         CreateClinicalRecord createClinicalRecord,
-                         CreateDiagnosticOrder createDiagnosticOrder,
-                         SearchClinicalRecordByPatient searchClinicalRecordByPatient) {
-        this.createClinicalOrder = createClinicalOrder;
-        this.createClinicalRecord = createClinicalRecord;
-        this.createDiagnosticOrder = createDiagnosticOrder;
-        this.searchClinicalRecordByPatient = searchClinicalRecordByPatient;
-    }
-
-    public void createClinicalOrder(ClinicalOrder order) throws Exception {
-        createClinicalOrder.create(order);
-    }
-
-    public void createClinicalRecord(ClinicalRecord record) throws Exception {
-        createClinicalRecord.create(record);
-    }
-
-    public void createDiagnosticOrder(DiagnosticOrder order) throws Exception {
-        createDiagnosticOrder.create(order);
-    }
-   
-    public List<ClinicalRecord> searchRecords(Patient patient) throws Exception {
-        return searchClinicalRecordByPatient.search(patient.getId());
-    }
-}
-=======
 
     public DoctorUseCase(CreateClinicalOrder createClinicalOrder,
                          CreateClinicalRecord createClinicalRecord,
@@ -72,5 +43,7 @@ public class DoctorUseCase {
     }
 }
 
->>>>>>> e5de97035147bada9c1d2d5aee69811e23add275
+
+
+
 
