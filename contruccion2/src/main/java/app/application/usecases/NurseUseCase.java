@@ -30,9 +30,4 @@ public class NurseUseCase {
 	  public void registerAttention(String patientId, RegistrationAttention attention, VitalData vitalData) throws Exception {
 	        registerNurseAttention.registerAttention(patientId, attention, vitalData);
 	    }
-<<<<<<< HEAD
 }
-
-
-=======
->>>>>>> d98169972ccf3fa424acb23690ca2ab08e9e2219
