@@ -38,8 +38,3 @@ public class AdminUseCase {
         createInsurance.registerInsurance(patientId, company, policyNumber, validity);
     }
 }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> e5de97035147bada9c1d2d5aee69811e23add275
