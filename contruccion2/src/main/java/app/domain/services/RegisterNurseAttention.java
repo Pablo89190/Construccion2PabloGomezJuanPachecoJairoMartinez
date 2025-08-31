@@ -20,4 +20,8 @@ public class RegisterNurseAttention {
         attention.setVitalData(vitalData);
         clinicalRecordPort.addAttention(patientId, attention);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e5de97035147bada9c1d2d5aee69811e23add275

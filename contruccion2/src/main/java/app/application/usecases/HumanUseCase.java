@@ -39,3 +39,4 @@ public class HumanUseCase {
         deleteUser.delete(user);
     }
 }
+

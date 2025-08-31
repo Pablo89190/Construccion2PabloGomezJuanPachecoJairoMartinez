@@ -31,4 +31,8 @@ public class NurseUseCase {
 	        registerNurseAttention.registerAttention(patientId, attention, vitalData);
 	    }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e5de97035147bada9c1d2d5aee69811e23add275
