@@ -8,8 +8,3 @@ public interface VitalDataPort {
 
 }
 
-<<<<<<< HEAD
-=======
-}
->>>>>>> d98169972ccf3fa424acb23690ca2ab08e9e2219
-
