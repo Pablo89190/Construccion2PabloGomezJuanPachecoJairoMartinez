@@ -11,8 +11,13 @@ public interface RegistrationAttentionPort {
     List<RegistrationAttention> findByPatient(Patient patient) throws Exception;
    
     void save(RegistrationAttention attention) throws Exception;
+<<<<<<< HEAD
 
 }
 
 
+=======
+}
+}
+>>>>>>> d98169972ccf3fa424acb23690ca2ab08e9e2219
 

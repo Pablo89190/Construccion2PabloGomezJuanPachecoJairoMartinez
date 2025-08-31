@@ -11,5 +11,9 @@ public interface ClinicalRecordPort {
     void addAttention(String patientId, RegistrationAttention attention) throws Exception;
 
 }
+<<<<<<< HEAD
 
+=======
+}
+>>>>>>> d98169972ccf3fa424acb23690ca2ab08e9e2219
 
