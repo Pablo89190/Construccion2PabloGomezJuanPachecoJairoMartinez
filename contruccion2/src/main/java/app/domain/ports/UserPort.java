@@ -12,7 +12,3 @@ public interface UserPort {
     
     void delete(User user);
 }
-
-
-
-

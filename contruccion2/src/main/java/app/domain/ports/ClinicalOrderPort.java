@@ -13,4 +13,3 @@ public interface ClinicalOrderPort {
     void save(ClinicalOrder clinicalOrder) throws Exception;
 }
 
-

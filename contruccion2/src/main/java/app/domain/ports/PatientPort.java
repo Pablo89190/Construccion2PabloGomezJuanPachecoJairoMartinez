@@ -13,7 +13,3 @@ public interface PatientPort {
     
     void save(Patient patient) throws Exception;
 }
-
-
-
-

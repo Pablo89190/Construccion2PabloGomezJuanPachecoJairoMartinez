@@ -35,11 +35,11 @@ public class DoctorClient {
 		}
 	}
 
-	private boolean options(String option) throws Exception {
+	/private boolean options(String option) throws Exception {
 		switch (option) {
 		case "1": {
-			ClinicalRecod clinicalRecord = searchClinicalRecordByPatientData();
-			doctorUseCase.CreateClinicalRecord(clinicalRecord);
+		//	ClinicalRecod clinicalRecord = searchClinicalRecordByPatientData();
+			//doctorUseCase.CreateClinicalRecord(clinicalRecord);
 			return true;
 		}
 		case "2": {

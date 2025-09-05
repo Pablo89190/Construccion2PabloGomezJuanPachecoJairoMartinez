@@ -8,6 +8,3 @@ public interface VitalDataPort {
 
 }
 
-
-
-

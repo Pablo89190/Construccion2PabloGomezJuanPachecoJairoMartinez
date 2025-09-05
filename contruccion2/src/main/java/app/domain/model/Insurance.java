@@ -24,6 +24,6 @@ public class Insurance {
 	}
 	public void setValidity(String validity) {
 		this.validity = validity;
-	}   
-}
+	
+	}
 
