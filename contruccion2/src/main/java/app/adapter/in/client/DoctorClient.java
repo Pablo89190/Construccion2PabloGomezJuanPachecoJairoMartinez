@@ -35,7 +35,7 @@ public class DoctorClient {
 		}
 	}
 
-	/private boolean options(String option) throws Exception {
+	private boolean options(String option) throws Exception {
 		switch (option) {
 		case "1": {
 		//	ClinicalRecod clinicalRecord = searchClinicalRecordByPatientData();
@@ -53,9 +53,10 @@ public class DoctorClient {
 		}
 		
 		}
+		return false;
 	}
 
-	private ClinicalRecord readClinicalRecordData() throws Exception {
+	private User readClinicalRecordData() throws Exception {
 		System.out.println("ingrese el nombre del dueño");
 		String name = reader.nextLine();
 		System.out.println("ingrese la cedula del dueño");

@@ -26,4 +26,5 @@ public class Insurance {
 		this.validity = validity;
 	
 	}
+}
 

@@ -13,8 +13,3 @@ public interface RegistrationAttentionPort {
     void save(RegistrationAttention attention) throws Exception;
 }
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 077db3882d5d312ddc26ce9dac7407cb9dda70d5
