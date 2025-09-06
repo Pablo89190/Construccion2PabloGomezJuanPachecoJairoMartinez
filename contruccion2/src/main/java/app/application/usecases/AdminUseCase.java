@@ -1,6 +1,7 @@
 package app.application.usecases;
 
 import app.domain.model.Patient;
+import app.domain.model.User;
 import app.domain.model.Invoice;
 import app.domain.services.CreatePatient;
 import app.domain.services.CreateInvoice;
@@ -22,7 +23,7 @@ public class AdminUseCase {
         this.createInsurance = createInsurance;
     }
 
-    public void createPatient(Patient patient) throws Exception {
+    public void createPatient(User patient) throws Exception {
         createPatient.createPerson(patient);
     }
 

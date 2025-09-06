@@ -1,6 +1,7 @@
 package app.domain.ports;
 
 import app.domain.model.Patient;
+import app.domain.model.User;
 
 public interface PatientPort {
     
@@ -11,5 +12,5 @@ public interface PatientPort {
 
     Patient findByFullName(String fullName) throws Exception;
     
-    void save(Patient patient) throws Exception;
+    void save(User patient) throws Exception;
 }

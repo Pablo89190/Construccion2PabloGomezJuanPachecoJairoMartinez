@@ -2,10 +2,13 @@ package app.adapter.in.client;
 
 import java.util.Scanner;
 
+import app.adapter.in.builder.PatientBuilder;
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.DoctorUseCase;
 import app.domain.model.ClinicalRecord;
+import app.domain.model.Patient;
 import app.domain.model.User;
+import app.domain.services.SearchClinicalRecordByPatient;
 
 public class DoctorClient {
 
@@ -38,8 +41,8 @@ public class DoctorClient {
 	private boolean options(String option) throws Exception {
 		switch (option) {
 		case "1": {
-		//	ClinicalRecod clinicalRecord = searchClinicalRecordByPatientData();
-			//doctorUseCase.CreateClinicalRecord(clinicalRecord);
+			ClinicalRecord clinicalRecord = searchClinicalRecordByPatient();
+			doctorUseCase.searchClinicalRecordByPatient(clinicalRecord);
 			return true;
 		}
 		case "2": {
@@ -56,7 +59,39 @@ public class DoctorClient {
 		return false;
 	}
 
-	private User readClinicalRecordData() throws Exception {
+	private ClinicalRecord readOrderData() throws Exception {
+		System.out.println("ingrese la cedula del veterinario que la genera");
+		String veterinarian = reader.nextLine();
+		System.out.println("ingrese el id de la mascota");
+		String id = reader.nextLine();
+		System.out.println("ingrese el nombre de la medicina");
+		String medicine = reader.nextLine();
+		System.out.println("ingrese la dosis");
+		String doce = reader.nextLine();
+		return clinicalRecordBuilder.builder(veterinarian, id, medicine, doce);
+
+	}
+
+	private Patient readPatientData() throws Exception {
+		System.out.println("ingrese la cedula del dueño");
+		String document = reader.nextLine();
+		System.out.println("ingrese el nombre de la mascota");
+		String name = reader.nextLine();
+		System.out.println("ingrese la edad de la mascota");
+		String age = reader.nextLine();
+		System.out.println("ingrese el peso");
+		String weigth = reader.nextLine();
+		System.out.println("ingrese la especie");
+		String spices = reader.nextLine();
+		System.out.println("ingrese las caracteristicas");
+		String features = reader.nextLine();
+		System.out.println("ingrese la raza");
+		String breed = reader.nextLine();
+
+		return patientBuilder.builder(document, name, age, weigth, spices, features, breed);
+	}
+
+	private User readOwnerData() throws Exception {
 		System.out.println("ingrese el nombre del dueño");
 		String name = reader.nextLine();
 		System.out.println("ingrese la cedula del dueño");
