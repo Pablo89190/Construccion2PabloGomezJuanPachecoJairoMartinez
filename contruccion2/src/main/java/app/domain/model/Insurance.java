@@ -1,17 +1,27 @@
 package app.domain.model;
 
-public class Insurance {
-    private String company;
+public class Insurance extends Patient {
+    private String insuranceCompany;
     private String policyNumber;      
     private String validity;
+    private String policyEndDate;
     
-    public Insurance () {}
+    
+    public String getPolicyEndDate() {
+		return policyEndDate;
+	}
+
+	public void setPolicyEndDate(String policyEndDate) {
+		this.policyEndDate = policyEndDate;
+	}
+
+	public Insurance () {}
     
 	public String getCompany() {
-		return company;
+		return insuranceCompany;
 	}
 	public void setCompany(String company) {
-		this.company = company;
+		this.insuranceCompany = company;
 	}
 	public String getPolicyNumber() {
 		return policyNumber;

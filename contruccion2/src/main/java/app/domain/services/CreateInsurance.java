@@ -11,11 +11,12 @@ public class CreateInsurance {
         this.insurancePort = insurancePort;
     }
 
-    public void registerInsurance(String patientId, String company, String policyNumber, String validity) {
+    public void registerInsurance(String patientId, String insuranceCompany, String policyNumber, String validity , String policyEndDate) {
         Insurance insurance = new Insurance();
-        insurance.setCompany(company);
+        insurance.setCompany(insuranceCompany);
         insurance.setPolicyNumber(policyNumber);
         insurance.setValidity(validity);
+        insurance.setPolicyEndDate(policyEndDate);
 
         insurancePort.saveInsurance(patientId, insurance);
     }

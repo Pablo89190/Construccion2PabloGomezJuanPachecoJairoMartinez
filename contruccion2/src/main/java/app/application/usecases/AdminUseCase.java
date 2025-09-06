@@ -1,6 +1,5 @@
 package app.application.usecases;
 
-import app.domain.model.Patient;
 import app.domain.model.User;
 import app.domain.model.Invoice;
 import app.domain.services.CreatePatient;
@@ -35,7 +34,7 @@ public class AdminUseCase {
         createEmergencyContact.registerEmergencyContact(patientId, firstName, lastName, relationship, phone);
     }
 
-    public void registerInsurance(String patientId, String company, String policyNumber, String validity) {
-        createInsurance.registerInsurance(patientId, company, policyNumber, validity);
+    public void registerInsurance(String patientId, String insuranceCompany, String policyNumber, String validity, String policyEndDate) {
+        createInsurance.registerInsurance(patientId, insuranceCompany, policyNumber, validity, policyEndDate);
     }
 }

@@ -1,6 +1,5 @@
 package app.domain.services;
 
-import app.domain.model.Patient;
 import app.domain.model.User;
 import app.domain.ports.PatientPort;
 

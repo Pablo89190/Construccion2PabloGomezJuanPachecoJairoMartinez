@@ -11,8 +11,8 @@ public class Patient extends Person {
 	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setGender(String string) {
+		this.gender = string;
 	}
 	public EmergencyContact getEmergencyContact() {
 		return emergencyContact;
@@ -25,6 +25,31 @@ public class Patient extends Person {
 	}
 	public void setInsurance(Insurance insurance) {
 		this.insurance = insurance;
+	}
+
+	public void setPolicyNumber(int policyNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPolicyEndDate(String policyEndDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEmergencyPhoneNumber(String emegercyPhoneNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setRelationShip(String relationShipValidator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setInsuranceCompany(Object insuranceCompany) {
+		// TODO Auto-generated method stub
+		
 	}           
     
     

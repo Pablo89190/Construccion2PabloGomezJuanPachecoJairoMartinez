@@ -5,20 +5,20 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import app.adapter.in.builder.UserBuilder;
+import app.adapter.in.builder.PatientBuilder;
 import app.application.usecases.AdminUseCase;
 import app.domain.model.User;
-import app.domain.model.EmergencyContact;
+
 
 @Controller
 public class AdminClient {
 
-    private static final String MENU = "Ingrese una de las opciones \n 1. para crear paciente \n 2. para crear factura \n 3. para salir";
+    private static final String MENU = "Ingrese una de las opciones \n 1. para crear paciente  \n 2. para salir";
     private static Scanner reader = new Scanner(System.in);
     @Autowired
     private AdminUseCase adminUseCase;
     @Autowired
-    private UserBuilder userBuilder;
+    private PatientBuilder patientBuilder;
 
     public void session() {
         boolean session = true;
@@ -32,19 +32,17 @@ public class AdminClient {
             System.out.println(MENU);
             String option = reader.nextLine();
             switch (option) {
-                case "1": {
-                    User user = readGeneralUserInfo();
-                    adminUseCase.createPatient(null);
-                    return true;
-                }
             
-                case "2": {
+            
+                case "1": {
                     // Nuevo caso para crear paciente
                     User patient = readPatientInfo();
                     adminUseCase.createPatient(patient);
                     return true;
                 }
-                case "3": {
+                
+                
+                case "2": {
                     System.out.println("hasta luego \n cerrando sesion");
                     return false;
                 }
@@ -60,24 +58,12 @@ public class AdminClient {
         }
     }
 
-    private User readGeneralUserInfo() throws Exception {
-        System.out.println("ingrese el nombre de la persona");
-        String name = reader.nextLine();
-        System.out.println("ingrese la cedula de la persona");
-        String document = reader.nextLine();
-        System.out.println("ingrese el nombre de de usuario");
-        String userName = reader.nextLine();
-        System.out.println("ingrese la contraseña");
-        String password = reader.nextLine();
-        System.out.println("ingrese la edad de la persona");
-        String age = reader.nextLine();
-        return userBuilder.build(name, document, age, userName, password);
-    }
+
 
     
     private User readPatientInfo() throws Exception {
         
-        User patient = readGeneralUserInfo();
+        
         System.out.println("Ingrese el género del paciente (masculino/femenino/otro):");
         String gender = reader.nextLine();
 
@@ -110,8 +96,8 @@ public class AdminClient {
         System.out.println("Ingrese la fecha de finalización de la póliza (dd/mm/yyyy):");
         String policyEndDate = reader.nextLine();
         
-        
-        return patient;
+        return patientBuilder.build( gender, address, phoneNumber, email, firstName, Relationship, emergencyPhoneNumber, insuranceCompany,policyNumber,policyStatus,policyEndDate );
+
     }
 
 }

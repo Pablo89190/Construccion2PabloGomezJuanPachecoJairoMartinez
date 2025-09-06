@@ -11,7 +11,7 @@ public class UserValidator extends SimpleValidators {
 	}
 	
 	public String passwordValidator(String value) throws Exception {
-		return stringValidator("contrasela", value);
+		return stringValidator("contraseña", value);
 	}
 	
 	public long idValidator(String value) throws Exception {
