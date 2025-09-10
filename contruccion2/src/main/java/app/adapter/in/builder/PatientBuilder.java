@@ -11,7 +11,7 @@ private PatientValidator patientValidator;
 	
 	public Patient build(String gender, String fullName, String address, String phoneNumber, String email, String firstName, String relationShip, String emergencyPhoneNumber, String insuranceCompany, String policyNumber, String policyStatus, String policyEndDate, String age ) throws Exception {
 		Patient patient = new Patient();
-		patient.setGender(patientValidator.genderValidator(gender));
+		patient.setGender(patientValidator.genderValidator(gender), null);
 		
 		patient.setAddress(patientValidator.addressValidator(address));
 		
@@ -23,18 +23,16 @@ private PatientValidator patientValidator;
 		
 		patient.setRelationShip(patientValidator.relationShipValidator(relationShip));
 		
-		patient.setEmergencyPhoneNumber(patientValidator.emegercyPhoneNumber(emergencyPhoneNumber));
+	patient.setEmergencyPhoneNumber(patientValidator.emegercyPhoneNumber(emergencyPhoneNumber));
 		
 		patient.setInsuranceCompany(patientValidator.insuranceCompany(insuranceCompany));
 		
-		patient.setPolicyNumber(patientValidator.policyNumber(policyNumber));
+	patient.setPolicyNumber(patientValidator.policyNumber(policyNumber));
 		
-		patient.setPolicyEndDate(patientValidator.policyEndDate(policyEndDate));
+	patient.setPolicyEndDate(patientValidator.policyEndDate(policyEndDate));
 		
 		return patient;
 	}
-
-
 	public User build(String gender, String address, String phoneNumber, String email, String firstName,
 			String relationship, String emergencyPhoneNumber, String insuranceCompany, String policyNumber,
 			boolean policyStatus, String policyEndDate) {
