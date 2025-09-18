@@ -11,82 +11,74 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class UserEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    private long id;
 
-	@Column(nullable = false, length = 100)
-	private String name;
+    @Column(nullable = false, length = 100)
+    private String name;
 
-	@Column(unique = true)
-	private long document;
+    @Column(unique = true)
+    private long document;
 
-	@Column(nullable = false)
-	private int age;
+    @Column(nullable = false)
+    private int age;
 
-	@Column(nullable = false, length = 50)
-	private String role;
+    @Column(length = 200)
+    private String address;
 
-	@Column(nullable = false, length = 50)
-	private String userName;
+    @Column(length = 20)
+    private String phone;
 
-	@Column(nullable = false)
-	private String password;
+    @Column(length = 100)
+    private String email;
 
-	// Getters y Setters
-	public Long getId() {
-		return id;
-	}
+    @Column(length = 20)
+    private String birthDate;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(nullable = false, length = 50)
+    private String role;
 
-	public String getName() {
-		return name;
-	}
+    @Column(nullable = false, length = 50)
+    private String userName;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(nullable = false)
+    private String password;
 
-	public long getDocument() {
-		return document;
-	}
+    // Constructors
+    public UserEntity() {}
 
-	public void setDocument(long document) {
-		this.document = document;
-	}
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-	public int getAge() {
-		return age;
-	}
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public long getDocument() { return document; }
+    public void setDocument(long document) { this.document = document; }
 
-	public String getRole() {
-		return role;
-	}
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getBirthDate() { return birthDate; }
+    public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public String getUserName() { return userName; }
+    public void setUserName(String userName) { this.userName = userName; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }
