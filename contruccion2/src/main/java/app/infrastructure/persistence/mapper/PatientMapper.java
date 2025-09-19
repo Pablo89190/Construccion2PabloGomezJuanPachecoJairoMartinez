@@ -1,8 +1,6 @@
 package app.infrastructure.persistence.mapper;
 
 import app.domain.model.Patient;
-import app.domain.model.EmergencyContact;
-import app.domain.model.Insurance;
 import app.infrastructure.persistence.entities.PatientEntity;
 
 public class PatientMapper {
@@ -52,6 +50,7 @@ public class PatientMapper {
         if (entity.getEmergencyContact() != null) {
             domain.setEmergencyContact(entity.getEmergencyContact());
         }
+  
 
         if (entity.getInsurance() != null) {
             domain.setInsurance(entity.getInsurance());
