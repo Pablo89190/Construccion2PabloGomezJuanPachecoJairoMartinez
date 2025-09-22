@@ -11,38 +11,38 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class UserEntity {
 
-    @Id
+	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private long id;
 
-    @Column(nullable = false, length = 100)
+     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(unique = true)
+      @Column(unique = true)
     private long document;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private int age;
 
-    @Column(length = 200)
+     @Column(length = 200)
     private String address;
 
     @Column(length = 20)
     private String phone;
 
-    @Column(length = 100)
+      @Column(length = 100)
     private String email;
 
-    @Column(length = 20)
+     @Column(length = 20)
     private String birthDate;
 
-    @Column(nullable = false, length = 50)
+     @Column(nullable = false, length = 50)
     private String role;
 
-    @Column(nullable = false, length = 50)
+     @Column(nullable = false, length = 50)
     private String userName;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private String password;
 
     // Constructors

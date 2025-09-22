@@ -16,27 +16,27 @@ import jakarta.persistence.Table;
 @Table(name = "vital_data")
 public class VitalDataEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
+     @ManyToOne(fetch = FetchType.EAGER)
+      @JoinColumn(name = "patient_id")
     private PatientEntity patient;
 
-    @Column(length = 50)
+      @Column(length = 50)
     private String bloodPressure;
 
-    @Column(length = 50)
+     @Column(length = 50)
     private String temperature;
 
-    @Column(length = 50)
+     @Column(length = 50)
     private String pulserate;
 
-    @Column(length = 50)
+     @Column(length = 50)
     private String bloodOxygenLevel;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private LocalDateTime recordedAt;
 
     // Constructors

@@ -8,13 +8,13 @@ import jakarta.persistence.Table;
 @Table(name = "diagnostic_orders")
 public class DiagnosticOrderEntity extends ClinicalOrderEntity {
 
-    @Column(nullable = false, length = 50)
+	 @Column(nullable = false, length = 50)
     private String exam;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private double cost;
 
     // Constructors

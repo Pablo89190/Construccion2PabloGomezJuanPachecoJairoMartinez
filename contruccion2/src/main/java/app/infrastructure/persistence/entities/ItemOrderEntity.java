@@ -14,18 +14,18 @@ import jakarta.persistence.Table;
 @Table(name = "item_orders")
 public class ItemOrderEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Id
+	  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clinical_order_id", nullable = false)
+      @ManyToOne(fetch = FetchType.LAZY)
+      @JoinColumn(name = "clinical_order_id", nullable = false)
     private ClinicalOrderEntity clinicalOrder;
 
-    @Column(nullable = false, length = 100)
+      @Column(nullable = false, length = 100)
     private String itemNumber;
 
-    @Column(columnDefinition = "TEXT")
+     @Column(columnDefinition = "TEXT")
     private String description;
 
     // Constructors

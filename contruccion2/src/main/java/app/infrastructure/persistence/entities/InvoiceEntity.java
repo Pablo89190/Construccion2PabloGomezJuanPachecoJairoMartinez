@@ -15,29 +15,29 @@ import jakarta.persistence.Table;
 @Table(name = "invoices")
 public class InvoiceEntity {
 
-    @Id
-    @Column(length = 50)
+	   @Id
+	  @Column(length = 50)
     private String invoiceId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id", nullable = false)
+      @ManyToOne(fetch = FetchType.EAGER)
+      @JoinColumn(name = "patient_id", nullable = false)
     private PatientEntity patient;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id")
+       @ManyToOne(fetch = FetchType.EAGER)
+       @JoinColumn(name = "doctor_id")
     private UserEntity doctor;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "clinical_order_id")
+      @ManyToOne(fetch = FetchType.EAGER)
+      @JoinColumn(name = "clinical_order_id")
     private ClinicalOrderEntity clinicalOrder;
 
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
+      @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
     private List<InvoiceDetailEntity> details;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private double total;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private boolean isMedicine;
 
     // Constructors

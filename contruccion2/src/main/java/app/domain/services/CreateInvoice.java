@@ -1,5 +1,8 @@
 package app.domain.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.ClinicalOrder;
 import app.domain.model.Invoice;
 import app.domain.model.Patient;
@@ -7,10 +10,15 @@ import app.domain.ports.ClinicalOrderPort;
 import app.domain.ports.InvoicePort;
 import app.domain.ports.PatientPort;
 
+
+@Service
 public class CreateInvoice {
 	
+	@Autowired
 	private PatientPort patientPort;
+	@Autowired
 	private ClinicalOrderPort clinicalOrderPort;
+	@Autowired
 	private InvoicePort invoicePort;
 
 	public CreateInvoice(PatientPort patientPort, ClinicalOrderPort clinicalOrderPort, InvoicePort invoicePort) {

@@ -14,24 +14,24 @@ import jakarta.persistence.Table;
 @Table(name = "invoice_details")
 public class InvoiceDetailEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Id
+	   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+      @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id", nullable = false)
     private InvoiceEntity invoice;
 
-    @Column(nullable = false, length = 200)
+      @Column(nullable = false, length = 200)
     private String concept;
 
-    @Column(nullable = false)
+     @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private double unitCost;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private double subtotal;
 
     // Constructors

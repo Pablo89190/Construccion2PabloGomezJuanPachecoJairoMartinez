@@ -18,25 +18,25 @@ import jakarta.persistence.Table;
 @Table(name = "clinical_orders")
 public class ClinicalOrderEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	  @Id
+	  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id", nullable = false)
+     @ManyToOne(fetch = FetchType.EAGER)
+      @JoinColumn(name = "patient_id", nullable = false)
     private PatientEntity patient;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id", nullable = false)
+      @ManyToOne(fetch = FetchType.EAGER)
+      @JoinColumn(name = "doctor_id", nullable = false)
     private UserEntity doctor;
 
-    @Column(nullable = false)
+       @Column(nullable = false)
     private LocalDate date;
 
-    @Column(nullable = false, length = 50)
+      @Column(nullable = false, length = 50)
     private String orderType;
 
-    @OneToMany(mappedBy = "clinicalOrder", fetch = FetchType.LAZY)
+      @OneToMany(mappedBy = "clinicalOrder", fetch = FetchType.LAZY)
     private List<ItemOrderEntity> items;
 
     // Constructors

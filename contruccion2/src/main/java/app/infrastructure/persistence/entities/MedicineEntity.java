@@ -9,20 +9,20 @@ import jakarta.persistence.Table;
 @Table(name = "medicines")
 public class MedicineEntity {
 
-    @Id
-    @Column(length = 50)
+	  @Id
+	 @Column(length = 50)
     private String medicineId;
 
-    @Column(nullable = false, length = 200)
+     @Column(nullable = false, length = 200)
     private String name;
 
     @Column(nullable = false, length = 100)
     private String doce;
 
-    @Column(nullable = false, length = 100)
+     @Column(nullable = false, length = 100)
     private String duration;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private double cost;
 
     // Constructors

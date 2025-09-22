@@ -11,26 +11,26 @@ import jakarta.persistence.Table;
 @Table(name = "procedures")
 public class ProcedureEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 200)
+     @Column(nullable = false, length = 200)
     private String name;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private int times;
 
-    @Column(nullable = false, length = 100)
+     @Column(nullable = false, length = 100)
     private String frequency;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private boolean requiresSpecialist;
 
-    @Column(length = 50)
+      @Column(length = 50)
     private String specialty;
 
-    @Column(nullable = false)
+      @Column(nullable = false)
     private double cost;
 
     // Constructors

@@ -17,39 +17,39 @@ import jakarta.persistence.Table;
 @Table(name = "patients")
 public class PatientEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Id
+	  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+      @Column(nullable = false, length = 100)
     private String fullName;
 
-    @Column(unique = true, nullable = false)
+     @Column(unique = true, nullable = false)
     private Long document;
 
     @Column(nullable = false)
     private int age;
 
-    @Column(length = 200)
+     @Column(length = 200)
     private String address;
 
-    @Column(length = 20)
+     @Column(length = 20)
     private String phone;
 
-    @Column(length = 100)
+      @Column(length = 100)
     private String email;
 
-    @Column(length = 20)
+     @Column(length = 20)
     private String birthDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+     @Enumerated(EnumType.STRING)
+     @Column(length = 20)
     private Gender gender;
 
-    @Embedded
+     @Embedded
     private EmergencyContact emergencyContact;
 
-    @Embedded
+    // @Embedded
     private Insurance insurance;
 
     // Constructors
