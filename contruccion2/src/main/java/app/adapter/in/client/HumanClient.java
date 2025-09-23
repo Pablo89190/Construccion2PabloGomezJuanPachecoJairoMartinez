@@ -1,7 +1,6 @@
 package app.adapter.in.client;
 
 import java.util.Scanner;
-
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.HumanUseCase;
 import app.domain.model.User;
