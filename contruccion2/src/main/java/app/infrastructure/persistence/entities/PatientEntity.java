@@ -49,9 +49,6 @@ public class PatientEntity {
      @Embedded
     private EmergencyContact emergencyContact;
 
-    // @Embedded
-    private Insurance insurance;
-
     // Constructors
     public PatientEntity() {}
 
@@ -88,8 +85,13 @@ public class PatientEntity {
         this.emergencyContact = emergencyContact;
     }
 
-    public Insurance getInsurance() { return insurance; }
-    public void setInsurance(Insurance insurance) {
-        this.insurance = insurance;
-    }
+	public void setInsurance(Insurance insurance2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getInsurance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

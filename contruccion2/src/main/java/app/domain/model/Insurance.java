@@ -1,6 +1,6 @@
 package app.domain.model;
 
-public class Insurance extends Patient {
+public class Insurance extends Patient{
     private String insuranceCompany;
     private String policyNumber;      
     private String validity;

@@ -23,7 +23,7 @@ public class Patient extends Person {
 	public Insurance getInsurance() {
 		return insurance;
 	}
-	public void setInsurance(Insurance insurance) {
+	public void setInsurance() {
 		this.insurance = insurance;
 	}
 

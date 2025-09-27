@@ -53,7 +53,7 @@ public class PatientMapper {
   
 
         if (entity.getInsurance() != null) {
-            domain.setInsurance(entity.getInsurance());
+            domain.setInsurance();
         }
 
         return domain;

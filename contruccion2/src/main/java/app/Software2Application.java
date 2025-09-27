@@ -11,4 +11,10 @@ public class Software2Application implements CommandLineRunner{
 		SpringApplication.run(Software2Application.class, args);
 		
 }
+
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("estoy vivo");
+		
+	}
 }

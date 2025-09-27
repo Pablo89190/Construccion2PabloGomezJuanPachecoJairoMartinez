@@ -38,6 +38,10 @@ public class ClinicalOrderEntity {
 
       @OneToMany(mappedBy = "clinicalOrder", fetch = FetchType.LAZY)
     private List<ItemOrderEntity> items;
+      
+      @ManyToOne
+      @JoinColumn(name="registration_attention_id", nullable=false)
+      private RegistrationAttentionEntity registrationAttention;
 
     // Constructors
     public ClinicalOrderEntity() {}
