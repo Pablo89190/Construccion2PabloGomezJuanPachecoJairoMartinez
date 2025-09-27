@@ -4,24 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-(name = "diagnostic_orders")
 public class DiagnosticOrderEntity extends ClinicalOrderEntity {
 
-	 @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String exam;
 
-     @Column(nullable = false)
+    @Column(nullable = false)
     private int quantity;
 
-     @Column(nullable = false)
+    @Column(nullable = false)
     private double cost;
 
-    // Constructors
+    // Constructor
     public DiagnosticOrderEntity() {
         super();
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public String getExam() { return exam; }
     public void setExam(String exam) { this.exam = exam; }
 
@@ -31,3 +30,4 @@ public class DiagnosticOrderEntity extends ClinicalOrderEntity {
     public double getCost() { return cost; }
     public void setCost(double cost) { this.cost = cost; }
 }
+

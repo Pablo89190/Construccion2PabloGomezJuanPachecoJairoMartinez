@@ -3,6 +3,8 @@ package app.infrastructure.persistence.entities;
 import app.domain.model.EmergencyContact;
 import app.domain.model.Insurance;
 import app.domain.model.emuns.Gender;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -17,36 +19,40 @@ import jakarta.persistence.Table;
 @Table(name = "patients")
 public class PatientEntity {
 
-	 @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-      @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String fullName;
 
-     @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private Long document;
 
     @Column(nullable = false)
     private int age;
 
-     @Column(length = 200)
+    @Column(length = 200)
     private String address;
 
-     @Column(length = 20)
+    @Column(length = 20)
     private String phone;
 
-      @Column(length = 100)
+    @Column(length = 100)
     private String email;
 
-     @Column(length = 20)
+    @Column(length = 20)
     private String birthDate;
 
-     @Enumerated(EnumType.STRING)
-     @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Gender gender;
 
-     @Embedded
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "name", column = @Column(name = "emergency_name", length = 100)),
+        @AttributeOverride(name = "phone", column = @Column(name = "emergency_phone", length = 20))
+    })
     private EmergencyContact emergencyContact;
 
     // Constructors
@@ -85,13 +91,13 @@ public class PatientEntity {
         this.emergencyContact = emergencyContact;
     }
 
-	public void setInsurance(Insurance insurance2) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setInsurance(Insurance insurance2) {
+        // TODO Auto-generated method stub
+    }
 
-	public Object getInsurance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Object getInsurance() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
+

@@ -1,6 +1,10 @@
 package app.domain.services;
 
 import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import app.domain.model.ClinicalRecord;
 import app.domain.model.Patient;
 import app.domain.model.RegistrationAttention;
@@ -10,26 +14,28 @@ import app.domain.ports.ClinicalRecordPort;
 import app.domain.ports.PatientPort;
 import app.domain.ports.UserPort;
 
-public class UpdateMedicalRegistry {
+@Service
+public class UpdateClinicalRecord {
 
-    private ClinicalRecordPort clinicalRecordPort;
-    private PatientPort patientPort;
-    private UserPort userPort;
+    private final ClinicalRecordPort clinicalRecordPort;
+    private final PatientPort patientPort;
+    private final UserPort userPort;
 
-    public UpdateMedicalRegistry(ClinicalRecordPort clinicalRecordPort, PatientPort patientPort, UserPort userPort) {
+    @Autowired
+    public UpdateClinicalRecord(ClinicalRecordPort clinicalRecordPort, 
+                                PatientPort patientPort, 
+                                UserPort userPort) {
         this.clinicalRecordPort = clinicalRecordPort;
         this.patientPort = patientPort;
         this.userPort = userPort;
     }
 
     public void updateRecord(ClinicalRecord clinicalRecord) throws Exception {
-
         Patient patient = patientPort.findById(clinicalRecord.getPatientId());
         if (patient == null) {
             throw new Exception("No existe el paciente para actualizar la historia clínica");
         }
 
-      
         if (clinicalRecord.getRecords() == null || clinicalRecord.getRecords().isEmpty()) {
             throw new Exception("No hay registros médicos para actualizar");
         }
@@ -50,7 +56,6 @@ public class UpdateMedicalRegistry {
     }
 
     public void addAttentionToRecord(String patientId, String date, RegistrationAttention attention) throws Exception {
-  
         Patient patient = patientPort.findById(patientId);
         if (patient == null) {
             throw new Exception("No existe el paciente para agregar la atención");

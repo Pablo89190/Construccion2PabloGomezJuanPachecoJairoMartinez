@@ -7,12 +7,14 @@ import app.domain.model.User;
 import app.domain.ports.EmergencyContactPort;
 import app.domain.ports.InsurancePort;
 import app.domain.ports.PatientPort;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UpdatePatient {
 
-    private PatientPort patientPort;
-    private EmergencyContactPort emergencyContactPort;
-    private InsurancePort insurancePort;
+    private final PatientPort patientPort;
+    private final EmergencyContactPort emergencyContactPort;
+    private final InsurancePort insurancePort;
 
     public UpdatePatient(PatientPort patientPort, EmergencyContactPort emergencyContactPort, InsurancePort insurancePort) {
         this.patientPort = patientPort;
@@ -25,7 +27,6 @@ public class UpdatePatient {
             throw new Exception("El paciente no puede ser nulo");
         }
 
-
         Patient existingPatient = patientPort.findById(patient.getId());
         if (existingPatient == null) {
             throw new Exception("No existe un paciente con este ID");
@@ -35,7 +36,6 @@ public class UpdatePatient {
     }
 
     public void updateEmergencyContact(String patientId, String firstName, String lastName, String relationship, String phone) throws Exception {
-
         Patient patient = patientPort.findById(patientId);
         if (patient == null) {
             throw new Exception("No existe un paciente con este ID");
@@ -51,7 +51,6 @@ public class UpdatePatient {
     }
 
     public void updateInsurance(String patientId, String insuranceCompany, String policyNumber, String validity, String policyEndDate) throws Exception {
-
         Patient patient = patientPort.findById(patientId);
         if (patient == null) {
             throw new Exception("No existe un paciente con este ID");

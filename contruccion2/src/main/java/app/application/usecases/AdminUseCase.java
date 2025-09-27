@@ -7,14 +7,16 @@ import app.domain.services.CreateInvoice;
 import app.domain.services.CreateEmergencyContact;
 import app.domain.services.CreateInsurance;
 import app.domain.services.UpdatePatient;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminUseCase {
 
-    private CreatePatient createPatient;
-    private CreateInvoice createInvoice;
-    private CreateEmergencyContact createEmergencyContact;
-    private CreateInsurance createInsurance;
-    private UpdatePatient updatePatient;
+    private final CreatePatient createPatient;
+    private final CreateInvoice createInvoice;
+    private final CreateEmergencyContact createEmergencyContact;
+    private final CreateInsurance createInsurance;
+    private final UpdatePatient updatePatient;
 
     public AdminUseCase(CreatePatient createPatient, CreateInvoice createInvoice,
                         CreateEmergencyContact createEmergencyContact, CreateInsurance createInsurance,

@@ -10,20 +10,23 @@ import app.domain.services.CreateClinicalOrder;
 import app.domain.services.CreateClinicalRecord;
 import app.domain.services.CreateDiagnosticOrder;
 import app.domain.services.SearchClinicalRecordByPatient;
-import app.domain.services.UpdateMedicalRegistry;
+import app.domain.services.UpdateClinicalRecord;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class DoctorUseCase {
     private CreateClinicalOrder createClinicalOrder;
     private CreateClinicalRecord createClinicalRecord;
     private CreateDiagnosticOrder createDiagnosticOrder;
     private SearchClinicalRecordByPatient searchClinicalRecordByPatient;
-    private UpdateMedicalRegistry updateMedicalRegistry;
+    private UpdateClinicalRecord updateMedicalRegistry;
 
     public DoctorUseCase(CreateClinicalOrder createClinicalOrder,
                          CreateClinicalRecord createClinicalRecord,
                          CreateDiagnosticOrder createDiagnosticOrder,
                          SearchClinicalRecordByPatient searchClinicalRecordByPatient,
-                         UpdateMedicalRegistry updateMedicalRegistry) {
+                         UpdateClinicalRecord updateMedicalRegistry) {
         this.createClinicalOrder = createClinicalOrder;
         this.createClinicalRecord = createClinicalRecord;
         this.createDiagnosticOrder = createDiagnosticOrder;
