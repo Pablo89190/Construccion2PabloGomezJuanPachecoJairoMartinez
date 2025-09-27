@@ -1,17 +1,26 @@
 package app.application.usecases;
 
 import app.domain.model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Invoice;
 import app.domain.services.CreatePatient;
 import app.domain.services.CreateInvoice;
 import app.domain.services.CreateEmergencyContact;
 import app.domain.services.CreateInsurance;
 
+@Service
 public class AdminUseCase {
 
+	@Autowired
     private CreatePatient createPatient;
+	@Autowired
     private CreateInvoice createInvoice;
+	@Autowired
     private CreateEmergencyContact createEmergencyContact;
+	@Autowired
     private CreateInsurance createInsurance;
 
     public AdminUseCase(CreatePatient createPatient, CreateInvoice createInvoice,

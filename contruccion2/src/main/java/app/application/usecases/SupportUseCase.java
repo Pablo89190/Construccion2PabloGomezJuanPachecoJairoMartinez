@@ -1,5 +1,8 @@
 package app.application.usecases;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Medicine;
 import app.domain.model.Procedure;
 import app.domain.model.DiagnosticOrder;
@@ -7,9 +10,13 @@ import app.domain.services.CreateMedicine;
 import app.domain.services.CreateProcedure;
 import app.domain.services.CreateDiagnosticOrder;
 
+@Service
 public class SupportUseCase {
+	@Autowired
     private CreateMedicine createMedicine;
+	@Autowired
     private CreateProcedure createProcedure;
+	@Autowired
     private CreateDiagnosticOrder createDiagnosticOrder;
 
     public SupportUseCase(CreateMedicine createMedicine, CreateProcedure createProcedure, CreateDiagnosticOrder createDiagnosticOrder) {

@@ -1,10 +1,15 @@
 package app.domain.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Procedure;
 import app.domain.ports.ProcedurePort;
 
+@Service
 public class CreateProcedure {
 
+	@Autowired
     private ProcedurePort procedurePort;
 
     public CreateProcedure(ProcedurePort procedurePort) {

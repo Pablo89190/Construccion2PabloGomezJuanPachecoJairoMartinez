@@ -1,13 +1,19 @@
 package app.application.usecases;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.User;
 import app.domain.model.emuns.Role;
 import app.domain.services.CreateUser;
 import app.domain.services.DeleteUser;
 
+@Service
 public class HumanUseCase {
     
+	@Autowired
     private final CreateUser createUser;
+	@Autowired
     private final DeleteUser deleteUser;
 
     public HumanUseCase(CreateUser createUser, DeleteUser deleteUser) {

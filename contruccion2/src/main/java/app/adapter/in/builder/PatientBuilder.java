@@ -1,11 +1,16 @@
 package app.adapter.in.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import app.adapter.in.validators.PatientValidator;
 import app.domain.model.Patient;
 import app.domain.model.User;
 
+@Component
 public class PatientBuilder {
 
+@Autowired
 private PatientValidator patientValidator;
 	
 	

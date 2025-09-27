@@ -1,14 +1,19 @@
 package app.domain.services;
 
+
+
 import java.util.List;
 import app.domain.model.ClinicalRecord;
 import app.domain.model.Patient;
 import app.domain.ports.ClinicalRecordPort;
 import app.domain.ports.PatientPort;
 
+
 public class SearchClinicalRecordByPatient {
 
+	
     private ClinicalRecordPort clinicalRecordPort;
+	
     private PatientPort patientPort;
 
     public SearchClinicalRecordByPatient(ClinicalRecordPort clinicalRecordPort, PatientPort patientPort) {

@@ -1,5 +1,8 @@
 package app.domain.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Patient;
 import app.domain.model.RegistrationAttention;
 import app.domain.model.User;
@@ -8,9 +11,13 @@ import app.domain.ports.PatientPort;
 import app.domain.ports.RegistrationAttentionPort;
 import app.domain.ports.UserPort;
 
+@Service
 public class CreateRegistrationAttention {
+	@Autowired
     private PatientPort patientPort;
+	@Autowired
     private UserPort userPort;
+	@Autowired
     private RegistrationAttentionPort registrationAttentionPort;
 
     public CreateRegistrationAttention(PatientPort patientPort, UserPort userPort, RegistrationAttentionPort registrationAttentionPort) {

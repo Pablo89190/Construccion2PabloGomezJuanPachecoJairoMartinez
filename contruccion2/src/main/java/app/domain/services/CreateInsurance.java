@@ -1,10 +1,15 @@
 package app.domain.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Insurance;
 import app.domain.ports.InsurancePort;
 
+@Service
 public class CreateInsurance {
-
+ 
+	@Autowired
     private final InsurancePort insurancePort;
 
     public CreateInsurance(InsurancePort insurancePort) {

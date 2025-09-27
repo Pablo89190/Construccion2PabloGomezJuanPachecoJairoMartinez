@@ -1,5 +1,8 @@
 package app.application.usecases;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import app.domain.model.ClinicalOrder;
 import app.domain.model.ClinicalRecord;
@@ -10,9 +13,13 @@ import app.domain.services.CreateClinicalRecord;
 import app.domain.services.CreateDiagnosticOrder;
 import app.domain.services.SearchClinicalRecordByPatient;
 
+@Service
 public class DoctorUseCase {
+	@Autowired
     private CreateClinicalOrder createClinicalOrder;
+	@Autowired
     private CreateClinicalRecord createClinicalRecord;
+	@Autowired
     private CreateDiagnosticOrder createDiagnosticOrder;
     private SearchClinicalRecordByPatient searchClinicalRecordByPatient;
 

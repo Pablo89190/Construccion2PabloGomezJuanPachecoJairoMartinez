@@ -1,5 +1,8 @@
 package app.adapter.in.validators;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public abstract class SimpleValidators {
 
 	public String stringValidator(String element, String value) throws Exception {

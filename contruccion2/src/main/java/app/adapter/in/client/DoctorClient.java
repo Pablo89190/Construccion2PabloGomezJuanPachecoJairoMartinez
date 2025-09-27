@@ -19,6 +19,7 @@ import app.domain.model.RegistrationAttention;
 
 @Controller
 public class DoctorClient {
+	
 
     private static final String MENU = "Ingrese una opción:\n" +
             "1. Buscar historia clínica por paciente\n" +

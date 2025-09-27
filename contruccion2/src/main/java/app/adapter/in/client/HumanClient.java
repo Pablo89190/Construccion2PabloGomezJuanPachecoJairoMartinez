@@ -1,15 +1,23 @@
 package app.adapter.in.client;
 
 import java.util.Scanner;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import app.adapter.in.builder.UserBuilder;
 import app.application.usecases.HumanUseCase;
 import app.domain.model.User;
 
+@Controller
 public class HumanClient {
 
 	private static final String MENU = "Ingrese una de las opciones \n 1. Para crear Administrador \n 2. Para crear Soporte de informacion \n 3. Para crear Doctor \n 4. Para crear enfermera \n 5. salir ";
 	private static Scanner reader = new Scanner(System.in);
+	
+	@Autowired
 	private HumanUseCase humanUseCase;
+	@Autowired
 	private UserBuilder userBuilder;
 
 	public void session() {
