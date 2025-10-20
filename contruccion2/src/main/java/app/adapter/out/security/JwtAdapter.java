@@ -5,16 +5,21 @@ import app.domain.model.auth.TokenResponse;
 import app.domain.ports.AuthenticationPort;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
-import java.security.Key;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
 public class JwtAdapter implements AuthenticationPort {
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final long EXPIRATION_TIME = 30 * 60 * 1000;
+    
+    // IMPORTANTE: En producción, usa una variable de entorno
+    // System.getenv("JWT_SECRET") o application.properties
+    private static final String SECRET = "hospital-clinic-secret-key-must-be-at-least-256-bits-long-hs256";
+    private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    private static final long EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutos
 
     @Override
     public TokenResponse authenticate(AuthCredentials credentials, String role) {
@@ -50,24 +55,20 @@ public class JwtAdapter implements AuthenticationPort {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
 
-        String token = Jwts.builder()
-            .setSubject(username)
-            .claim("role", role)
-            .setIssuedAt(now)
-            .setExpiration(expiration)
-            .signWith(SECRET_KEY)
-            .compact();
-
-        return token;
+        return Jwts.builder()
+                .subject(username)
+                .claim("role", role)
+                .issuedAt(now)
+                .expiration(expiration)
+                .signWith(SECRET_KEY)
+                .compact();
     }
 
     private Claims getClaims(String token) {
-        Claims claims = Jwts.parserBuilder()
-            .setSigningKey(SECRET_KEY)
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
-            
-        return claims;
+        return Jwts.parser()
+                .verifyWith(SECRET_KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

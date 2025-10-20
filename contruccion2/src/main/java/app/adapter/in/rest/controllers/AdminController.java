@@ -1,7 +1,5 @@
 package app.adapter.in.rest.controllers;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,82 +16,152 @@ import app.application.exceptions.InputsException;
 import app.application.usecases.AdminUseCase;
 import app.domain.model.User;
 import app.domain.model.emuns.Role;
+import app.application.usecases.HumanUseCase;
 
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
-	@Autowired
-	private UserBuilder userBuilder;
-	@Autowired
-	private AdminUseCase adminUseCase;
+    
+    @Autowired
+    private UserBuilder userBuilder;
+    
+    @Autowired
+    private HumanUseCase humanUseCase;
 
-	@PostMapping("/seller")
-        @PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> createSeller(@RequestBody UserRequest request) {
-	    try {
-	        User user = userBuilder.build(
-	                request.getName(),
-	                request.getDocument(),
-	                request.getAge(),
-	                request.getUserName(),
-	                request.getPassword()
-	        );
+    @PostMapping("/doctors")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createDoctor(@RequestBody UserRequest request) {
+        try {
+            User user = userBuilder.build(
+                    request.getName(),
+                    request.getDocument(),
+                    request.getAge(),
+                    request.getUserName(),
+                    request.getPassword()
+            );
 
-	        adminUseCase.createSeller(user);
+            humanUseCase.createDoctor(user);
 
-	        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Doctor creado exitosamente");
 
-	    } catch (InputsException ie) {
-	        return ResponseEntity
-	                .status(HttpStatus.BAD_REQUEST)
-	                .body(ie.getMessage());
+        } catch (InputsException ie) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ie.getMessage());
 
-	    } catch (BusinessException be) {
-	        return ResponseEntity
-	                .status(HttpStatus.CONFLICT)
-	                .body(be.getMessage());
+        } catch (BusinessException be) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(be.getMessage());
 
-	    } catch (Exception e) {
-	        return ResponseEntity
-	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(e.getMessage());
-	    }
-	}
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
 
+    @PostMapping("/nurses")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createNurse(@RequestBody UserRequest request) {
+        try {
+            User user = userBuilder.build(
+                    request.getName(),
+                    request.getDocument(),
+                    request.getAge(),
+                    request.getUserName(),
+                    request.getPassword()
+            );
 
-	@PostMapping("/veterinarian")
-        @PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> createVeterinarian(@RequestBody UserRequest request) {
-	    try {
-	        User user = userBuilder.build(
-	                request.getName(),
-	                request.getDocument(),
-	                request.getAge(),
-	                request.getUserName(),
-	                request.getPassword()
-	        );
+            humanUseCase.createNurse(user);
 
-	        adminUseCase.createVeterinarian(user);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Enfermera creada exitosamente");
 
-	        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        } catch (InputsException ie) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ie.getMessage());
 
-	    } catch (InputsException ie) {
-	        return ResponseEntity
-	                .status(HttpStatus.BAD_REQUEST)
-	                .body(ie.getMessage());
+        } catch (BusinessException be) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(be.getMessage());
 
-	    } catch (BusinessException be) {
-	        return ResponseEntity
-	                .status(HttpStatus.CONFLICT)
-	                .body(be.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
 
-	    } catch (Exception e) {
-	        return ResponseEntity
-	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(e.getMessage());
-	    }
-	}
+    @PostMapping("/support")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createSupport(@RequestBody UserRequest request) {
+        try {
+            User user = userBuilder.build(
+                    request.getName(),
+                    request.getDocument(),
+                    request.getAge(),
+                    request.getUserName(),
+                    request.getPassword()
+            );
 
+            humanUseCase.createSupport(user);
 
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Personal de soporte creado exitosamente");
+
+        } catch (InputsException ie) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ie.getMessage());
+
+        } catch (BusinessException be) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(be.getMessage());
+
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/admins")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createAdmin(@RequestBody UserRequest request) {
+        try {
+            User user = userBuilder.build(
+                    request.getName(),
+                    request.getDocument(),
+                    request.getAge(),
+                    request.getUserName(),
+                    request.getPassword()
+            );
+
+            humanUseCase.createAdmin(user);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Administrador creado exitosamente");
+
+        } catch (InputsException ie) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ie.getMessage());
+
+        } catch (BusinessException be) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(be.getMessage());
+
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(e.getMessage());
+        }
+    }
 }
