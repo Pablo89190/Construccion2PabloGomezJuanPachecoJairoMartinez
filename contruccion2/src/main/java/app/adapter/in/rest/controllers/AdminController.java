@@ -13,9 +13,7 @@ import app.adapter.in.builder.UserBuilder;
 import app.adapter.in.rest.request.UserRequest;
 import app.application.exceptions.BusinessException;
 import app.application.exceptions.InputsException;
-import app.application.usecases.AdminUseCase;
 import app.domain.model.User;
-import app.domain.model.emuns.Role;
 import app.application.usecases.HumanUseCase;
 
 @RestController

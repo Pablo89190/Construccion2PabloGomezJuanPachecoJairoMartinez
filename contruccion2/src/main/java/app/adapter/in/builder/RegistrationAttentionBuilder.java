@@ -9,7 +9,6 @@ import app.adapter.in.validators.UserValidator;
 import app.domain.model.Patient;
 import app.domain.model.RegistrationAttention;
 import app.domain.model.User;
-import app.domain.model.VitalData;
 import app.domain.model.ClinicalOrder;
 
 @Component

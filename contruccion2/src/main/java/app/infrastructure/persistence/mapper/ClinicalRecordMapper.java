@@ -10,7 +10,7 @@ import app.infrastructure.persistence.entities.RegistrationAttentionEntity;
 
 public class ClinicalRecordMapper {
 
-    // Dominio → Entidad
+  
     public static ClinicalRecordEntity toEntity(ClinicalRecord domain) {
         if (domain == null) return null;
 
@@ -24,7 +24,7 @@ public class ClinicalRecordMapper {
         return entity;
     }
 
-    // Entidad → Dominio
+  
     public static ClinicalRecord toDomain(ClinicalRecordEntity entity) {
         if (entity == null) return null;
 
