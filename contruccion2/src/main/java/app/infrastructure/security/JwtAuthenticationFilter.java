@@ -11,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     
@@ -22,10 +22,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, 
                                   HttpServletResponse response, 
                                   FilterChain filterChain) throws ServletException, IOException {
-        String token = this.extractToken(request);
-        
-        if (token != null) {
-            this.processToken(token);
+        try {
+            String token = this.extractToken(request);
+            
+            if (token != null) {
+                this.processToken(token);
+            }
+        } catch (Exception e) {
+            
+            System.err.println("Error procesando token JWT: " + e.getMessage());
         }
         
         filterChain.doFilter(request, response);
@@ -45,23 +50,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String role = authenticationPort.extractRole(token);
 
             if (role == null || role.trim().isEmpty()) {
-                return; // no role -> no authentication
+                return;
             }
 
-            String normalized = role.trim();
-            if (!normalized.toUpperCase().startsWith("ROLE_")) {
-                normalized = "ROLE_" + normalized.toUpperCase();
-            } else {
-                normalized = normalized.toUpperCase();
+         
+            String normalizedRole = role.trim().toUpperCase();
+            if (!normalizedRole.startsWith("ROLE_")) {
+                normalizedRole = "ROLE_" + normalizedRole;
             }
 
-            ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(normalized));
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(normalizedRole);
             
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                 username, 
                 null, 
-                authorities
+                Collections.singletonList(authority)
             );
             
             SecurityContextHolder.getContext().setAuthentication(auth);
