@@ -31,7 +31,19 @@ public class UserAdapter implements UserPort {
 
     @Override
     public void save(User user) throws Exception {
-        UserEntity entity = UserMapper.toEntity(user);
+        UserEntity entity = new UserEntity();
+        
+        entity.setName(user.getFullName());
+        entity.setDocument(user.getId());
+        entity.setAge(user.getAge());
+        entity.setAddress(user.getAddress());
+        entity.setPhone(user.getPhone());
+        entity.setEmail(user.getEmail());
+        entity.setBirthDate(user.getBirthDate());
+        entity.setRole(user.getRole() != null ? user.getRole().name() : "");
+        entity.setUserName(user.getUsername());
+        entity.setPassword(user.getPassword());
+        
         userRepository.save(entity);
     }
 

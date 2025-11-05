@@ -6,12 +6,11 @@ import app.infrastructure.persistence.entities.UserEntity;
 
 public class UserMapper {
 
-    // Dominio → Entidad
+   
     public static UserEntity toEntity(User domain) {
         if (domain == null) return null;
 
         UserEntity entity = new UserEntity();
-        entity.setId(domain.getId());
         entity.setName(domain.getFullName());
         entity.setDocument(domain.getId());
         entity.setAge(domain.getAge());
@@ -26,12 +25,11 @@ public class UserMapper {
         return entity;
     }
 
-    // Entidad → Dominio
     public static User toDomain(UserEntity entity) {
         if (entity == null) return null;
 
         User domain = new User();
-        domain.setId(entity.getId());
+        domain.setId(entity.getDocument()); 
         domain.setFullName(entity.getName());
         domain.setAge(entity.getAge());
         domain.setAddress(entity.getAddress());

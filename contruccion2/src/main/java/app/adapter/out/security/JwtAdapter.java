@@ -15,11 +15,10 @@ import java.util.Date;
 @Component
 public class JwtAdapter implements AuthenticationPort {
     
-    // IMPORTANTE: En producción, usa una variable de entorno
-    // System.getenv("JWT_SECRET") o application.properties
+
     private static final String SECRET = "hospital-clinic-secret-key-must-be-at-least-256-bits-long-hs256";
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-    private static final long EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutos
+    private static final long EXPIRATION_TIME = 30 * 60 * 1000; 
 
     @Override
     public TokenResponse authenticate(AuthCredentials credentials, String role) {
