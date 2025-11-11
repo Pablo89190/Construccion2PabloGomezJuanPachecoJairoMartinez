@@ -10,9 +10,11 @@ public class PatientMapper {
         if (domain == null) return null;
 
         PatientEntity entity = new PatientEntity();
-        entity.setId(domain.getId());
+        
+        // Establecer document (requerido)
+        entity.setDocument(domain.getId());
+        
         entity.setFullName(domain.getFullName());
-        entity.setDocument(domain.getId()); // 
         entity.setAge(domain.getAge());
         entity.setAddress(domain.getAddress());
         entity.setPhone(domain.getPhone());
@@ -20,13 +22,17 @@ public class PatientMapper {
         entity.setBirthDate(domain.getBirthDate());
         entity.setGender(domain.getGender());
 
-   
+        // Contacto de emergencia
         if (domain.getEmergencyContact() != null) {
             entity.setEmergencyContact(domain.getEmergencyContact());
         }
 
+        // Información de seguro
         if (domain.getInsurance() != null) {
-            entity.setInsurance(domain.getInsurance());
+            entity.setInsuranceCompany(domain.getInsurance().getCompany());
+            entity.setPolicyNumber(domain.getInsurance().getPolicyNumber());
+            entity.setPolicyStatus(domain.getInsurance().getValidity());
+            entity.setPolicyEndDate(domain.getInsurance().getPolicyEndDate());
         }
 
         return entity;
@@ -37,26 +43,38 @@ public class PatientMapper {
         if (entity == null) return null;
 
         Patient domain = new Patient();
-        domain.setId(entity.getId());
+        
+        domain.setId(entity.getDocument()); // Usar document como ID
         domain.setFullName(entity.getFullName());
         domain.setAge(entity.getAge());
         domain.setAddress(entity.getAddress());
         domain.setPhone(entity.getPhone());
         domain.setEmail(entity.getEmail());
         domain.setBirthDate(entity.getBirthDate());
-        domain.setGender(null, entity.getGender());
+        
+        // Gender
+        if (entity.getGender() != null) {
+            domain.setGender(entity.getGender().name(), entity.getGender());
+        }
 
-       
+        // Contacto de emergencia
         if (entity.getEmergencyContact() != null) {
             domain.setEmergencyContact(entity.getEmergencyContact());
         }
-  
 
-        if (entity.getInsurance() != null) {
-            domain.setInsurance();
+        // Información de seguro
+        if (entity.getInsuranceCompany() != null || entity.getPolicyNumber() != null) {
+            domain.setInsuranceCompany(entity.getInsuranceCompany());
+            if (entity.getPolicyNumber() != null) {
+                try {
+                    domain.setPolicyNumber(Integer.parseInt(entity.getPolicyNumber()));
+                } catch (NumberFormatException e) {
+                    // Ignorar si no se puede convertir
+                }
+            }
+            domain.setPolicyEndDate(entity.getPolicyEndDate());
         }
 
         return domain;
     }
 }
-

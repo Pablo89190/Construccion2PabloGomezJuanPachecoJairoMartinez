@@ -1,6 +1,7 @@
 package app.adapter.in.rest.request;
 
 public class PatientRequest {
+    private String document;  // AGREGAR ESTE CAMPO
     private String gender;
     private String fullName;
     private String address;
@@ -17,6 +18,11 @@ public class PatientRequest {
     
     public PatientRequest() {}
     
+    // AGREGAR getter y setter para document
+    public String getDocument() { return document; }
+    public void setDocument(String document) { this.document = document; }
+    
+    // Resto de getters y setters...
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
     

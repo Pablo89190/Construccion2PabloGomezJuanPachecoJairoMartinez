@@ -28,7 +28,7 @@ public class PatientAdapter implements PatientPort {
 
     @Override
     public Patient findById(long id) throws Exception {
-        PatientEntity entity = patientRepository.findById(id);
+        PatientEntity entity = patientRepository.findByDocument(id);
         if (entity == null) {
             return null;
         }
@@ -45,17 +45,24 @@ public class PatientAdapter implements PatientPort {
     }
 
     @Override
-    public void save(User patient) throws Exception {
-        // Convertir User a Patient si es necesario
-        Patient patientDomain = new Patient();
-        patientDomain.setId(patient.getId());
-        patientDomain.setFullName(patient.getFullName());
-        patientDomain.setAge(patient.getAge());
-        patientDomain.setEmail(patient.getEmail());
-        patientDomain.setAddress(patient.getAddress());
-        patientDomain.setPhone(patient.getPhone());
+    public void save(User user) throws Exception {
+        // Validar que el document no sea 0
+        if (user.getId() == 0) {
+            throw new Exception("El documento del paciente es requerido");
+        }
         
-        PatientEntity entity = PatientMapper.toEntity(patientDomain);
+        // Crear entidad con document
+        PatientEntity entity = new PatientEntity();
+        
+        entity.setDocument(user.getId());  // ESTABLECER DOCUMENT
+        entity.setFullName(user.getFullName());
+        entity.setAge(user.getAge());
+        entity.setEmail(user.getEmail());
+        entity.setAddress(user.getAddress());
+        entity.setPhone(user.getPhone());
+        entity.setBirthDate(user.getBirthDate());
+        
+        // Guardar en la base de datos
         patientRepository.save(entity);
     }
 }
