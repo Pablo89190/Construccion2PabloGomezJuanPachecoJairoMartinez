@@ -16,13 +16,18 @@ public class ClinicalOrderMapper {
         if (domain == null) return null;
 
         ClinicalOrderEntity entity = new ClinicalOrderEntity();
-        entity.setId(domain.getId());
+        
+        // NO establecer ID si es 0 - JPA lo generará
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
+        
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setDate(domain.getDate());
         entity.setOrderType(domain.getOrderType().name());
 
-  
+        // Mapear items
         if (domain.getItems() != null && !domain.getItems().isEmpty()) {
             List<ItemOrderEntity> itemEntities = new ArrayList<>();
             for (ItemOrder item : domain.getItems()) {
@@ -40,7 +45,6 @@ public class ClinicalOrderMapper {
     public static ClinicalOrder toDomain(ClinicalOrderEntity entity) {
         if (entity == null) return null;
 
-  
         ClinicalOrder domain = new ClinicalOrder() {};
         
         domain.setId(entity.getId());
@@ -49,7 +53,7 @@ public class ClinicalOrderMapper {
         domain.setDate(entity.getDate());
         domain.setOrderType(OrderType.valueOf(entity.getOrderType()));
 
-
+        // Mapear items
         if (entity.getItems() != null && !entity.getItems().isEmpty()) {
             List<ItemOrder> items = new ArrayList<>();
             for (ItemOrderEntity itemEntity : entity.getItems()) {

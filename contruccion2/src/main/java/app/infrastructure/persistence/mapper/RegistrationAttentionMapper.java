@@ -1,5 +1,3 @@
-
-// 12. RegistrationAttentionMapper.java
 package app.infrastructure.persistence.mapper;
 
 import java.util.ArrayList;
@@ -16,23 +14,52 @@ public class RegistrationAttentionMapper {
     public static RegistrationAttentionEntity toEntity(RegistrationAttention domain) {
         if (domain == null) return null;
 
+        System.out.println("🔄 Mapeando RegistrationAttention a Entity...");
+
         RegistrationAttentionEntity entity = new RegistrationAttentionEntity();
-        entity.setId(domain.getId());
-        entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
-        entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
+        
+        // NO establecer ID si es 0 - JPA lo generará
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
+        
+        // Mapear paciente (REQUERIDO)
+        if (domain.getPatient() != null) {
+            entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
+            System.out.println("✅ Patient mapeado en atención");
+        } else {
+            System.err.println("⚠️ WARNING: Patient es NULL en RegistrationAttention");
+        }
+        
+        // Mapear doctor (OPCIONAL)
+        if (domain.getDoctor() != null) {
+            entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
+            System.out.println("✅ Doctor mapeado en atención");
+        }
+        
         entity.setReason(domain.getReason());
         entity.setSymptoms(domain.getSymptoms());
         entity.setDiagnosis(domain.getDiagnosis());
-        entity.setVitalData(VitalDataMapper.toEntity(domain.getVitalData()));
-        entity.setCreatedAt(java.time.LocalDateTime.now());
+        
+        // Mapear datos vitales (OPCIONAL)
+        if (domain.getVitalData() != null) {
+            entity.setVitalData(VitalDataMapper.toEntity(domain.getVitalData()));
+            System.out.println("✅ VitalData mapeado");
+        }
+        
+        // El createdAt se establece automáticamente en el constructor
 
+        // Mapear órdenes si existen
         if (domain.getOrders() != null && !domain.getOrders().isEmpty()) {
             List<ClinicalOrderEntity> orderEntities = new ArrayList<>();
             for (ClinicalOrder order : domain.getOrders()) {
                 orderEntities.add(ClinicalOrderMapper.toEntity(order));
             }
             entity.setOrders(orderEntities);
+            System.out.println("✅ " + orderEntities.size() + " órdenes mapeadas");
         }
+
+        System.out.println("✅ RegistrationAttentionEntity mapeado completamente");
 
         return entity;
     }
@@ -50,7 +77,7 @@ public class RegistrationAttentionMapper {
         domain.setDiagnosis(entity.getDiagnosis());
         domain.setVitalData(VitalDataMapper.toDomain(entity.getVitalData()));
 
-  
+        // Mapear órdenes
         if (entity.getOrders() != null && !entity.getOrders().isEmpty()) {
             List<ClinicalOrder> orders = new ArrayList<>();
             for (ClinicalOrderEntity orderEntity : entity.getOrders()) {

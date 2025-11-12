@@ -7,13 +7,21 @@ public class PatientMapper {
 
     // Dominio → Entidad
     public static PatientEntity toEntity(Patient domain) {
-        if (domain == null) return null;
+        if (domain == null) {
+            System.err.println("PatientMapper.toEntity: domain es NULL");
+            return null;
+        }
+
+        System.out.println("PatientMapper.toEntity:");
+        System.out.println("  ID: " + domain.getId());
+        System.out.println("  FullName: " + domain.getFullName());
 
         PatientEntity entity = new PatientEntity();
         
-        // Establecer document (requerido)
+        // Establecer document (requerido en la base de datos)
         entity.setDocument(domain.getId());
         
+        // Establecer datos básicos
         entity.setFullName(domain.getFullName());
         entity.setAge(domain.getAge());
         entity.setAddress(domain.getAddress());
@@ -22,12 +30,12 @@ public class PatientMapper {
         entity.setBirthDate(domain.getBirthDate());
         entity.setGender(domain.getGender());
 
-        // Contacto de emergencia
+        // Contacto de emergencia (opcional)
         if (domain.getEmergencyContact() != null) {
             entity.setEmergencyContact(domain.getEmergencyContact());
         }
 
-        // Información de seguro
+        // Información de seguro (opcional)
         if (domain.getInsurance() != null) {
             entity.setInsuranceCompany(domain.getInsurance().getCompany());
             entity.setPolicyNumber(domain.getInsurance().getPolicyNumber());
@@ -35,12 +43,16 @@ public class PatientMapper {
             entity.setPolicyEndDate(domain.getInsurance().getPolicyEndDate());
         }
 
+        System.out.println("PatientEntity creado exitosamente");
         return entity;
     }
 
     // Entidad → Dominio
     public static Patient toDomain(PatientEntity entity) {
-        if (entity == null) return null;
+        if (entity == null) {
+            System.err.println("PatientMapper.toDomain: entity es NULL");
+            return null;
+        }
 
         Patient domain = new Patient();
         

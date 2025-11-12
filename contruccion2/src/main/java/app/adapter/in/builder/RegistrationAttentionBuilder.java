@@ -24,22 +24,23 @@ public class RegistrationAttentionBuilder {
                                      String symptoms, String diagnosis) throws Exception {
         RegistrationAttention attention = new RegistrationAttention();
         
-  
+        // NO establecer ID - JPA lo generará automáticamente
+        
+        // Crear y establecer patient
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
         attention.setPatient(patient);
         
-  
+        // Crear y establecer doctor
         User doctor = new User();
         doctor.setId(userValidator.idValidator(doctorId));
         attention.setDoctor(doctor);
         
-        
+        // Establecer datos de la atención
         attention.setReason(userValidator.nameValidator(reason));
         attention.setSymptoms(userValidator.nameValidator(symptoms));
         attention.setDiagnosis(userValidator.nameValidator(diagnosis));
         
-        attention.setId(System.currentTimeMillis());
         attention.setOrders(new ArrayList<ClinicalOrder>());
         
         return attention;
@@ -47,6 +48,8 @@ public class RegistrationAttentionBuilder {
     
     public RegistrationAttention buildNurseAttention(String patientId, String reason, String symptoms) throws Exception {
         RegistrationAttention attention = new RegistrationAttention();
+        
+        // NO establecer ID - JPA lo generará automáticamente
         
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
@@ -56,7 +59,6 @@ public class RegistrationAttentionBuilder {
         attention.setSymptoms(userValidator.nameValidator(symptoms));
         attention.setDiagnosis("PENDIENTE EVALUACIÓN MÉDICA");
         
-        attention.setId(System.currentTimeMillis());
         attention.setOrders(new ArrayList<ClinicalOrder>());
         
         return attention;

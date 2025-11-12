@@ -35,7 +35,7 @@ public class RegisterNurseAttention {
             throw new Exception("La atención no puede ser nula");
         }
 
-    
+        // Validar que el paciente existe
         long patientIdLong = Long.parseLong(patientId);
         Patient patient = patientPort.findById(patientIdLong);
         
@@ -43,38 +43,52 @@ public class RegisterNurseAttention {
             throw new Exception("El paciente no existe en el sistema");
         }
         
-        System.out.println("Paciente encontrado: " + patient.getFullName());
+        System.out.println("✅ Paciente encontrado: " + patient.getFullName());
 
-  
+    
         List<ClinicalRecord> existingRecords = clinicalRecordPort.findByPatient(patient);
+        
+        ClinicalRecord clinicalRecord = null;
         
         if (existingRecords == null || existingRecords.isEmpty()) {
             System.out.println("No existe historia clínica, creando una nueva...");
             
+            // Crear nueva historia clínica CON TODOS LOS DATOS DEL PACIENTE
+            clinicalRecord = new ClinicalRecord();
+            clinicalRecord.setPatientId(patientId);
             
-            ClinicalRecord newRecord = new ClinicalRecord();
-            newRecord.setPatientId(patientId);
-            newRecord.setPatient(patient);
-            newRecord.setRecords(new HashMap<>());
+            // Establecer el paciente completo con todos sus datos
+            Patient fullPatient = new Patient();
+            fullPatient.setId(patient.getId());
+            fullPatient.setFullName(patient.getFullName());
+            fullPatient.setAge(patient.getAge());
+            fullPatient.setEmail(patient.getEmail());
+            fullPatient.setAddress(patient.getAddress());
+            fullPatient.setPhone(patient.getPhone());
+            fullPatient.setGender(patient.getGender() != null ? patient.getGender().name() : null, patient.getGender());
             
-            clinicalRecordPort.save(newRecord);
+            clinicalRecord.setPatient(fullPatient);
+            clinicalRecord.setRecords(new HashMap<>());
+            
+            // Guardar la historia clínica
+            clinicalRecordPort.save(clinicalRecord);
             
             System.out.println(" Historia clínica creada automáticamente");
         } else {
             System.out.println(" Historia clínica ya existe");
+            clinicalRecord = existingRecords.get(0);
         }
 
-  
+        // Establecer datos vitales en la atención
         attention.setVitalData(vitalData);
         
-        
+        // Asegurar que el paciente esté establecido en la atención
         attention.setPatient(patient);
 
- 
+        // Guardar la atención
         clinicalRecordPort.addAttention(patientId, attention);
         
-        System.out.println(" Atención de enfermería registrada exitosamente");
+        System.out.println("Atención de enfermería registrada exitosamente");
         System.out.println("FIN REGISTRO DE ATENCIÓN \n");
     }
 }
-

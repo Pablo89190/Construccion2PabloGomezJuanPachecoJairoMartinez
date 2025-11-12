@@ -12,7 +12,12 @@ public class DiagnosticOrderMapper {
         if (domain == null) return null;
 
         DiagnosticOrderEntity entity = new DiagnosticOrderEntity();
-        entity.setId(domain.getId());
+        
+        // NO establecer ID si es 0 - JPA lo generará
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
+        
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setDate(domain.getDate());
