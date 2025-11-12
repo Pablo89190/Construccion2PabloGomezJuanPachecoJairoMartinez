@@ -1,9 +1,15 @@
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "diagnostic_order_entity")
+@DiscriminatorValue("DIAGNOSTIC_ORDER")
+@PrimaryKeyJoinColumn(name = "id")
 public class DiagnosticOrderEntity extends ClinicalOrderEntity {
 
     @Column(nullable = false, length = 50)
@@ -30,4 +36,3 @@ public class DiagnosticOrderEntity extends ClinicalOrderEntity {
     public double getCost() { return cost; }
     public void setCost(double cost) { this.cost = cost; }
 }
-

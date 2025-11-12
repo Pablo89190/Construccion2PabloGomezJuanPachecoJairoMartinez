@@ -27,38 +27,35 @@ public class ClinicalOrderBuilder {
     public DiagnosticOrder buildDiagnosticOrder(String doctorId, String patientId, 
                                               String examType, String quantity, String cost) throws Exception {
         
-        System.out.println("🔵 === Construyendo Orden Diagnóstica ===");
+        System.out.println(" Construyendo Orden Diagnóstica ");
         System.out.println("  DoctorId: " + doctorId);
         System.out.println("  PatientId: " + patientId);
         System.out.println("  ExamType: " + examType);
         
         DiagnosticOrder order = new DiagnosticOrder();
         
-        // NO establecer ID - JPA lo generará automáticamente
         
-        // Validar y establecer doctor
         User doctor = new User();
         doctor.setId(userValidator.idValidator(doctorId));
         order.setDoctor(doctor);
         
-        // Validar y establecer paciente
+
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
         order.setPatient(patient);
         
-        // Validar y establecer examen
+ 
         if (examType == null || examType.trim().isEmpty()) {
             throw new Exception("El tipo de examen es requerido");
         }
         order.setExam(DiagnosticExam.valueOf(examType.toUpperCase()));
         
-        // Validar y establecer cantidad
         order.setQuantity(userValidator.ageValidator(quantity)); 
         
-        // Validar y establecer costo
+    
         order.setCost(validateCost(cost));
         
-        // Establecer valores por defecto
+ 
         order.setDate(LocalDate.now());
         order.setOrderType(OrderType.DIAGNOSTIC);
         order.setItems(new ArrayList<ItemOrder>());
@@ -70,38 +67,35 @@ public class ClinicalOrderBuilder {
     
     public ClinicalOrder buildBasicOrder(String doctorId, String patientId, String orderTypeStr) throws Exception {
         
-        System.out.println("🔵 === Construyendo Orden Clínica Básica ===");
+        System.out.println("Construyendo Orden Clínica Básica");
         System.out.println("  DoctorId: " + doctorId);
         System.out.println("  PatientId: " + patientId);
         System.out.println("  OrderType: " + orderTypeStr);
-        
-        // Validar que orderType no sea null
+
         if (orderTypeStr == null || orderTypeStr.trim().isEmpty()) {
             throw new Exception("El tipo de orden es requerido. Use: MEDICINE, PROCEDURE o DIAGNOSTIC");
         }
         
         ClinicalOrder order = new ClinicalOrder() {}; 
         
-        // NO establecer ID - JPA lo generará automáticamente
-        
-        // Validar y establecer doctor
+      
         User doctor = new User();
         doctor.setId(userValidator.idValidator(doctorId));
         order.setDoctor(doctor);
         
-        // Validar y establecer paciente
+   
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
         order.setPatient(patient);
    
-        // Validar y establecer tipo de orden
+
         try {
             order.setOrderType(OrderType.valueOf(orderTypeStr.toUpperCase()));
         } catch (IllegalArgumentException e) {
             throw new Exception("Tipo de orden inválido. Use: MEDICINE, PROCEDURE o DIAGNOSTIC");
         }
         
-        // Establecer valores por defecto
+  
         order.setDate(LocalDate.now());
         order.setItems(new ArrayList<ItemOrder>());
         

@@ -21,7 +21,7 @@ public class VitalDataEntity {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id", nullable = true)  // ✅ CAMBIO: nullable = true
+    @JoinColumn(name = "patient_id", nullable = true)  
     private PatientEntity patient;
 
     @Column(length = 50)

@@ -8,6 +8,8 @@ public interface UserPort {
     
     User findByPassword(String password) throws Exception; 
     
+    User findByDocument(long document) throws Exception; 
+    
     void save(User user) throws Exception; 
     
     void delete(User user);

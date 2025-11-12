@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +21,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "clinical_orders")
-@Inheritance(strategy = InheritanceType.JOINED) 
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("CLINICAL_ORDER")
 public class ClinicalOrderEntity {
 
     @Id
@@ -43,7 +48,7 @@ public class ClinicalOrderEntity {
     private List<ItemOrderEntity> items;
 
     @ManyToOne
-    @JoinColumn(name="registration_attention_id", nullable=false)
+    @JoinColumn(name="registration_attention_id", nullable=true)
     private RegistrationAttentionEntity registrationAttention;
 
     // Constructors

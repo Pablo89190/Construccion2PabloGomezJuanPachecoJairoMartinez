@@ -28,9 +28,9 @@ public class PatientController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createPatient(@RequestBody PatientRequest request) {
         try {
-            // Construir el paciente completo con DOCUMENT
+            
             Patient patient = patientBuilder.build(
-                request.getDocument(),  // DOCUMENT PRIMERO
+                request.getDocument(), 
                 request.getGender(),
                 request.getFullName(),
                 request.getAddress(),

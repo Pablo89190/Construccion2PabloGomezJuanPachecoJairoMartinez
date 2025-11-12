@@ -22,7 +22,7 @@ public class PatientBuilder {
 
         Patient patient = new Patient();
 
-        // ID/Document - VALIDAR Y ESTABLECER
+      
         long validatedDocument = patientValidator.idValidator(document);
         patient.setId(validatedDocument);
         
@@ -35,14 +35,14 @@ public class PatientBuilder {
         patient.setAge(patientValidator.ageValidator(age));
         patient.setEmail(patientValidator.emailValidator(email));
 
-        // Contacto de emergencia
+    
         EmergencyContact contact = new EmergencyContact();
         contact.setFirstName(patientValidator.firstNameValidator(emergencyContactName));
         contact.setRelationship(patientValidator.relationShipValidator(relationShip));
         contact.setPhone(patientValidator.emegercyPhoneNumber(emergencyPhoneNumber));
         patient.setEmergencyContact(contact);
 
-        // Seguro
+   
         patient.setInsuranceCompany(patientValidator.insuranceCompany(insuranceCompany));
         patient.setPolicyNumber(patientValidator.policyNumber(policyNumber));
         patient.setPolicyEndDate(patientValidator.policyEndDate(policyEndDate));
