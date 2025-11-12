@@ -52,4 +52,12 @@ public class UserAdapter implements UserPort {
         UserEntity entity = UserMapper.toEntity(user);
         userRepository.delete(entity);
     }
+    
+    public User findByDocument(long document) throws Exception {
+        UserEntity entity = userRepository.findByDocument(document);
+        if (entity == null) {
+            return null;
+        }
+        return UserMapper.toDomain(entity);
+    }
 }

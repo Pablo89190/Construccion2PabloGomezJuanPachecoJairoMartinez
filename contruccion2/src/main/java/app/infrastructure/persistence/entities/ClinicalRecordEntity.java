@@ -17,35 +17,37 @@ import jakarta.persistence.Table;
 @Table(name = "clinical_records")
 public class ClinicalRecordEntity {
 
-	 @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-      @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String patientId;
 
-     @ManyToOne(fetch = FetchType.EAGER)
-      @JoinColumn(name = "patient_entity_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_entity_id", nullable = false)
     private PatientEntity patient;
 
-     @ManyToOne(fetch = FetchType.EAGER)
-     @JoinColumn(name = "doctor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id", nullable = true)  // ✅ CAMBIO: nullable = true
     private UserEntity doctor;
 
-     @ManyToOne(fetch = FetchType.EAGER)
-      @JoinColumn(name = "clinical_order_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "clinical_order_id", nullable = true)  // ✅ CAMBIO: nullable = true
     private ClinicalOrderEntity clinicalOrder;
 
-     @OneToMany(mappedBy = "clinicalRecord", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clinicalRecord", fetch = FetchType.LAZY)
     private List<RegistrationAttentionEntity> registrations;
 
-      @Column(nullable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     // Constructors
-    public ClinicalRecordEntity() {}
+    public ClinicalRecordEntity() {
+        this.createdAt = LocalDateTime.now();  // ✅ NUEVO: Inicializar automáticamente
+    }
 
-    // Getters and Setters
+    // Getters and Setters (NO CAMBIAR)
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
 

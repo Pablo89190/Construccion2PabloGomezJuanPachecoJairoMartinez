@@ -23,41 +23,43 @@ public class RegistrationAttentionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-     @ManyToOne(fetch = FetchType.EAGER)
-     @JoinColumn(name = "patient_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id", nullable = false)
     private PatientEntity patient;
 
-     @ManyToOne(fetch = FetchType.EAGER)
-     @JoinColumn(name = "doctor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id", nullable = true)  // ✅ CAMBIO: nullable = true
     private UserEntity doctor;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "clinical_record_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clinical_record_id", nullable = true)  // ✅ CAMBIO: nullable = true
     private ClinicalRecordEntity clinicalRecord;
 
-      @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String reason;
 
     @Column(columnDefinition = "TEXT")
     private String symptoms;
 
-      @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String diagnosis;
 
-     @OneToOne(fetch = FetchType.EAGER)
-     @JoinColumn(name = "vital_data_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vital_data_id")
     private VitalDataEntity vitalData;
 
-     @OneToMany(mappedBy = "registrationAttention", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "registrationAttention", fetch = FetchType.LAZY)
     private List<ClinicalOrderEntity> orders;
 
-      @Column(nullable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     // Constructors
-    public RegistrationAttentionEntity() {}
+    public RegistrationAttentionEntity() {
+        this.createdAt = LocalDateTime.now();  
+    }
 
-    // Getters and Setters
+    
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
