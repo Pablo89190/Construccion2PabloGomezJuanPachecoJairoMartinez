@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "clinical_orders")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("CLINICAL_ORDER")
 public class ClinicalOrderEntity {
@@ -47,9 +47,20 @@ public class ClinicalOrderEntity {
     @OneToMany(mappedBy = "clinicalOrder", fetch = FetchType.LAZY)
     private List<ItemOrderEntity> items;
 
-    @ManyToOne
+    // ✅ CAMBIO: nullable=true (antes era false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="registration_attention_id", nullable=true)
     private RegistrationAttentionEntity registrationAttention;
+
+    // ✅ Campos para DiagnosticOrder
+    @Column(nullable = true)
+    private Double cost;
+
+    @Column(nullable = true, length = 50)
+    private String exam;
+
+    @Column(nullable = true)
+    private Integer quantity;
 
     // Constructors
     public ClinicalOrderEntity() {}
@@ -77,4 +88,13 @@ public class ClinicalOrderEntity {
     public void setRegistrationAttention(RegistrationAttentionEntity registrationAttention) {
         this.registrationAttention = registrationAttention;
     }
+
+    public Double getCost() { return cost; }
+    public void setCost(Double cost) { this.cost = cost; }
+
+    public String getExam() { return exam; }
+    public void setExam(String exam) { this.exam = exam; }
+
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 }

@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class ClinicalRecord {
     private String patientId;
+    private Patient patient;
+    private User doctor;
+    private ClinicalOrder clinicalOrder;
     private Map<String, RegistrationAttention> records; 
     
     public ClinicalRecord() {}
@@ -24,26 +27,27 @@ public class ClinicalRecord {
         this.records = records;
     }
 
-	public void setDoctor(User doctor) {	
-	}
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
+    }
 
-	public void setClinicalOrder(ClinicalOrder clinicalOrder) {	
-	}
+    public void setClinicalOrder(ClinicalOrder clinicalOrder) {
+        this.clinicalOrder = clinicalOrder;
+    }
 
-	public void setPatient(Patient patient) {	
-	}
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
-	public User getDoctor() {
-		return null;
-	}
+    public User getDoctor() {
+        return doctor;
+    }
 
-	public Patient getPatient() {
-		return null;
-	}
+    public Patient getPatient() {
+        return patient;
+    }
 
-	public ClinicalOrder getClinicalOrder() {
-		return null;
-	}
+    public ClinicalOrder getClinicalOrder() {
+        return clinicalOrder;
+    }
 }
-
-

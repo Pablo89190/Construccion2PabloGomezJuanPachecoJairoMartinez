@@ -30,47 +30,57 @@ public class CreateClinicalOrder {
     }
     
     public void create(ClinicalOrder clinicalOrder) throws Exception {
-        System.out.println("CREANDO ORDEN CLÍNICA");
+        System.out.println("🔄 === INICIANDO CREACIÓN DE ORDEN CLÍNICA ===");
         
-       
-        User doctor = null;
-        
-        if (clinicalOrder.getDoctor().getUsername() != null) {
-        
-            doctor = userPort.findByUserName(clinicalOrder.getDoctor().getUsername());
-        } else if (clinicalOrder.getDoctor().getId() > 0) {
-            
-            System.out.println("Buscando doctor por documento: " + clinicalOrder.getDoctor().getId());
-       
-            doctor = new User();
-            doctor.setId(clinicalOrder.getDoctor().getId());
-            doctor.setRole(Role.DOCTOR);
+        // ✅ PASO 1: Validar que el PACIENTE EXISTE en BD
+        System.out.println("📋 PASO 1: Validando paciente...");
+        Patient patient = patientPort.findById(clinicalOrder.getPatient().getId());
+        if (patient == null) {
+            System.err.println("❌ PACIENTE NO ENCONTRADO");
+            throw new Exception("❌ El paciente con documento " + clinicalOrder.getPatient().getId() + 
+                              " NO existe en el sistema. Debe crear el paciente primero.");
         }
+        System.out.println("✅ Paciente validado: " + patient.getFullName());
         
+        // ✅ PASO 2: Validar que el DOCTOR EXISTE y tiene rol DOCTOR
+        System.out.println("📋 PASO 2: Validando doctor...");
+        User doctor = null;
+
+        if (clinicalOrder.getDoctor().getId() > 0) {
+            System.out.println("🔍 Buscando doctor por documento: " + clinicalOrder.getDoctor().getId());
+            doctor = userPort.findByDocument(clinicalOrder.getDoctor().getId());
+        } 
+        else if (clinicalOrder.getDoctor().getUsername() != null && !clinicalOrder.getDoctor().getUsername().isEmpty()) {
+            System.out.println("🔍 Buscando doctor por username: " + clinicalOrder.getDoctor().getUsername());
+            doctor = userPort.findByUserName(clinicalOrder.getDoctor().getUsername());
+        }
+
         if (doctor == null) {
-            throw new Exception("El doctor no existe en el sistema");
+            System.err.println("❌ DOCTOR NO ENCONTRADO");
+            throw new Exception("❌ El doctor NO existe en el sistema");
         }
         
         if (!doctor.getRole().equals(Role.DOCTOR)) {
-            throw new Exception("Las órdenes solo las pueden crear los Médicos");
+            System.err.println("❌ USUARIO NO ES DOCTOR");
+            throw new Exception("❌ Las órdenes solo las pueden crear los Médicos. Rol actual: " + doctor.getRole());
         }
         
-        System.out.println("Doctor validado");
+        System.out.println("✅ Doctor validado: " + doctor.getFullName() + " (Rol: " + doctor.getRole() + ")");
 
-       
-        Patient patient = patientPort.findById(clinicalOrder.getPatient().getId());
-        if (patient == null) {
-            throw new Exception("Las órdenes se deben aplicar a pacientes ya registrados");
-        }
-        
-        System.out.println("Paciente validado: " + patient.getFullName());
-
+        // ✅ PASO 3: Asignar objetos persistidos a la orden
+        System.out.println("📋 PASO 3: Asignando objetos persistidos...");
         clinicalOrder.setPatient(patient);
         clinicalOrder.setDoctor(doctor);
+        System.out.println("✅ Objetos asignados correctamente");
         
+        // ✅ PASO 4: Guardar la orden en BD
+        System.out.println("📋 PASO 4: Guardando orden en base de datos...");
         clinicalOrderPort.save(clinicalOrder);
         
-        System.out.println("Orden clínica guardada exitosamente");
-        System.out.println(" FIN CREACIÓN DE ORDEN \n");
+        System.out.println("✅✅✅ ORDEN CLÍNICA CREADA EXITOSAMENTE");
+        System.out.println("   - Tipo: " + clinicalOrder.getOrderType());
+        System.out.println("   - Paciente: " + patient.getFullName());
+        System.out.println("   - Doctor: " + doctor.getFullName());
+        System.out.println("🔄 === FIN CREACIÓN ORDEN CLÍNICA ===\n");
     }
 }

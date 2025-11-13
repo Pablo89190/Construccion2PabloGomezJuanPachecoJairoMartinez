@@ -53,6 +53,7 @@ public class UserAdapter implements UserPort {
         userRepository.delete(entity);
     }
     
+    @Override
     public User findByDocument(long document) throws Exception {
         UserEntity entity = userRepository.findByDocument(document);
         if (entity == null) {

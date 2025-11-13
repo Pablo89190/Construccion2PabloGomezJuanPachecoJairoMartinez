@@ -38,34 +38,37 @@ public class DiagnosticOrderMapper {
             entity.setId(domain.getId());
         }
 
+        // ✅ CRÍTICO: Validar que Patient EXISTE en BD
         if (domain.getPatient() != null) {
             Long patientDocument = domain.getPatient().getId();
             System.out.println("🔍 Buscando paciente por documento: " + patientDocument);
             
             PatientEntity patientEntity = patientRepository.findByDocument(patientDocument);
             
+            // ✅ VALIDACIÓN: Si NO existe, lanzar excepción
             if (patientEntity == null) {
                 System.err.println("❌ ERROR: No se encontró paciente con documento: " + patientDocument);
-                throw new RuntimeException("No se encontró el paciente con documento: " + patientDocument);
+                throw new RuntimeException("El paciente con documento " + patientDocument + " no existe en el sistema. Debe crear el paciente primero.");
             }
             
             entity.setPatient(patientEntity);
-            System.out.println("Paciente cargado desde BD: " + patientEntity.getFullName());
+            System.out.println("✅ Paciente cargado desde BD: " + patientEntity.getFullName());
         } else {
-            System.err.println("ERROR: Patient es NULL en domain");
+            System.err.println("❌ ERROR: Patient es NULL en domain");
             throw new RuntimeException("El paciente no puede ser null");
         }
         
-
+        // ✅ CRÍTICO: Validar que Doctor EXISTE en BD
         if (domain.getDoctor() != null) {
             Long doctorDocument = domain.getDoctor().getId();
             System.out.println("🔍 Buscando doctor por documento: " + doctorDocument);
             
             UserEntity doctorEntity = userRepository.findByDocument(doctorDocument);
             
+            // ✅ VALIDACIÓN: Si NO existe, lanzar excepción
             if (doctorEntity == null) {
                 System.err.println("❌ ERROR: No se encontró doctor con documento: " + doctorDocument);
-                throw new RuntimeException("No se encontró el doctor con documento: " + doctorDocument);
+                throw new RuntimeException("El doctor con documento " + doctorDocument + " no existe en el sistema.");
             }
             
             entity.setDoctor(doctorEntity);
@@ -81,11 +84,11 @@ public class DiagnosticOrderMapper {
         entity.setQuantity(domain.getQuantity());
         entity.setCost(domain.getCost());
         
-        System.out.println(" DiagnosticOrderEntity mapeado completamente");
+        System.out.println("✅ DiagnosticOrderEntity mapeado completamente");
         System.out.println("   - Examen: " + entity.getExam());
         System.out.println("   - Cantidad: " + entity.getQuantity());
         System.out.println("   - Costo: " + entity.getCost());
-        System.out.println(" Fin mapeo \n");
+        System.out.println("✅ Fin mapeo \n");
 
         return entity;
     }

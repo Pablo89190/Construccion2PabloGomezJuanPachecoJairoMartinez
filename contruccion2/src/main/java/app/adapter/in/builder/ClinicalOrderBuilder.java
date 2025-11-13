@@ -24,6 +24,7 @@ public class ClinicalOrderBuilder {
     @Autowired
     private PatientValidator patientValidator;
 
+    // ✅ MÉTODO 1: Órdenes Diagnósticas - CON COST
     public DiagnosticOrder buildDiagnosticOrder(String doctorId, String patientId, 
                                               String examType, String quantity, String cost) throws Exception {
         
@@ -34,28 +35,22 @@ public class ClinicalOrderBuilder {
         
         DiagnosticOrder order = new DiagnosticOrder();
         
-        
         User doctor = new User();
         doctor.setId(userValidator.idValidator(doctorId));
         order.setDoctor(doctor);
         
-
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
         order.setPatient(patient);
         
- 
         if (examType == null || examType.trim().isEmpty()) {
             throw new Exception("El tipo de examen es requerido");
         }
         order.setExam(DiagnosticExam.valueOf(examType.toUpperCase()));
         
         order.setQuantity(userValidator.ageValidator(quantity)); 
-        
-    
         order.setCost(validateCost(cost));
         
- 
         order.setDate(LocalDate.now());
         order.setOrderType(OrderType.DIAGNOSTIC);
         order.setItems(new ArrayList<ItemOrder>());
@@ -65,6 +60,7 @@ public class ClinicalOrderBuilder {
         return order;
     }
     
+    // ✅ MÉTODO 2: Órdenes Normales (MEDICINE/PROCEDURE) - SIN COST
     public ClinicalOrder buildBasicOrder(String doctorId, String patientId, String orderTypeStr) throws Exception {
         
         System.out.println("Construyendo Orden Clínica Básica");
@@ -73,43 +69,49 @@ public class ClinicalOrderBuilder {
         System.out.println("  OrderType: " + orderTypeStr);
 
         if (orderTypeStr == null || orderTypeStr.trim().isEmpty()) {
-            throw new Exception("El tipo de orden es requerido. Use: MEDICINE, PROCEDURE o DIAGNOSTIC");
+            throw new Exception("El tipo de orden es requerido. Use: MEDICINE o PROCEDURE");
+        }
+        
+        // Validar que NO sea DIAGNOSTIC - esas deben usar buildDiagnosticOrder()
+        String upperType = orderTypeStr.toUpperCase();
+        if (upperType.equals("DIAGNOSTIC")) {
+            throw new Exception("Para órdenes DIAGNOSTIC use buildDiagnosticOrder() que incluye cost");
         }
         
         ClinicalOrder order = new ClinicalOrder() {}; 
         
-      
         User doctor = new User();
         doctor.setId(userValidator.idValidator(doctorId));
         order.setDoctor(doctor);
         
-   
         Patient patient = new Patient();
         patient.setId(patientValidator.idValidator(patientId));
         order.setPatient(patient);
-   
 
         try {
-            order.setOrderType(OrderType.valueOf(orderTypeStr.toUpperCase()));
+            order.setOrderType(OrderType.valueOf(upperType));
         } catch (IllegalArgumentException e) {
-            throw new Exception("Tipo de orden inválido. Use: MEDICINE, PROCEDURE o DIAGNOSTIC");
+            throw new Exception("Tipo de orden inválido. Use: MEDICINE o PROCEDURE");
         }
         
-  
         order.setDate(LocalDate.now());
         order.setItems(new ArrayList<ItemOrder>());
+        
+        // ✅ NO establecer cost aquí - ClinicalOrder NO tiene este campo
         
         System.out.println("✅ Orden clínica construida exitosamente");
         
         return order;
     }
 
+    // ✅ MÉTODO 3: Órdenes con Items - SIN COST
     public ClinicalOrder buildOrderWithItems(String doctorId, String patientId, String orderTypeStr,
                                            String[] itemNumbers, String[] descriptions) throws Exception {
         
+        // Usar buildBasicOrder que valida correctamente
         ClinicalOrder order = buildBasicOrder(doctorId, patientId, orderTypeStr);
         
-    
+        // Agregar items
         if (itemNumbers != null && descriptions != null && itemNumbers.length == descriptions.length) {
             for (int i = 0; i < itemNumbers.length; i++) {
                 ItemOrder item = new ItemOrder();
@@ -122,9 +124,10 @@ public class ClinicalOrderBuilder {
         return order;
     }
     
+    // ✅ Validador de Cost - Solo para órdenes diagnósticas
     private double validateCost(String cost) throws Exception {
         if (cost == null || cost.trim().isEmpty()) {
-            throw new Exception("El costo no puede estar vacío");
+            throw new Exception("El costo no puede estar vacío para órdenes diagnósticas");
         }
         try {
             double costValue = Double.parseDouble(cost);

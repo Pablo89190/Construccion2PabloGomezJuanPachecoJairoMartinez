@@ -32,15 +32,18 @@ public class CreateDiagnosticOrder {
     }
 
     public void create(DiagnosticOrder order) throws Exception {
-        System.out.println("CREANDO ORDEN DIAGNÓSTICA");
+        System.out.println("INICIANDO CREACIÓN DE ORDEN DIAGNÓSTICA");
         
+        System.out.println("PASO 1: Validando paciente...");
         Patient patient = patientPort.findById(order.getPatient().getId());
         if (patient == null) {
-            throw new Exception("El paciente no existe en el sistema. Documento: " + order.getPatient().getId());
+            System.err.println("❌ PACIENTE NO ENCONTRADO");
+            throw new Exception("❌ El paciente con documento " + order.getPatient().getId() + 
+                              " NO existe en el sistema. Debe crear el paciente primero.");
         }
-        System.out.println("Paciente encontrado: " + patient.getFullName());
+        System.out.println("✅ Paciente validado: " + patient.getFullName());
         
-
+        System.out.println("📋 PASO 2: Validando doctor...");
         User doctor = null;
 
         if (order.getDoctor().getId() > 0) {
@@ -48,34 +51,41 @@ public class CreateDiagnosticOrder {
             doctor = userPort.findByDocument(order.getDoctor().getId());
         }
 
-        else if (order.getDoctor().getUsername() != null) {
+        else if (order.getDoctor().getUsername() != null && !order.getDoctor().getUsername().isEmpty()) {
             System.out.println("🔍 Buscando doctor por username: " + order.getDoctor().getUsername());
             doctor = userPort.findByUserName(order.getDoctor().getUsername());
         }
-        
 
         if (doctor == null) {
-            throw new Exception("El doctor no existe en el sistema. Documento: " + order.getDoctor().getId());
+            System.err.println("DOCTOR NO ENCONTRADO");
+            throw new Exception(" El doctor con documento/usuario " + order.getDoctor().getId() + 
+                              " NO existe en el sistema.");
         }
         
         if (!doctor.getRole().equals(Role.DOCTOR)) {
-            throw new Exception("Solo los médicos pueden crear órdenes diagnósticas. Rol actual: " + doctor.getRole());
+            System.err.println("USUARIO NO ES DOCTOR");
+            throw new Exception(" Solo los médicos pueden crear órdenes diagnósticas. Rol actual: " + doctor.getRole());
         }
         
-        System.out.println("Doctor encontrado: " + doctor.getFullName() + " (Rol: " + doctor.getRole() + ")");
+        System.out.println("Doctor validado: " + doctor.getFullName() + " (Rol: " + doctor.getRole() + ")");
         
 
+        System.out.println("PASO 3: Asignando objetos persistidos...");
         order.setPatient(patient);
         order.setDoctor(doctor);
+        System.out.println("Objetos asignados correctamente");
         
      
+        System.out.println(" PASO 4: Guardando orden en base de datos...");
         diagnosticOrderPort.save(order);
         
-        System.out.println("✅ Orden diagnóstica creada exitosamente");
-        System.out.println("   - ID: " + order.getId());
-        System.out.println("   - Examen: " + order.getExam());
-        System.out.println("   - Cantidad: " + order.getQuantity());
-        System.out.println("   - Costo: " + order.getCost());
-        System.out.println("FIN CREACIÓN ORDEN DIAGNÓSTICA \n");
+        System.out.println("ORDEN DIAGNÓSTICA CREADA EXITOSAMENTE");
+        System.out.println("ID: " + order.getId());
+        System.out.println("Paciente: " + patient.getFullName());
+        System.out.println("Doctor: " + doctor.getFullName());
+        System.out.println("Examen: " + order.getExam());
+        System.out.println("Cantidad: " + order.getQuantity());
+        System.out.println("Costo: $" + order.getCost());
+        System.out.println("FIN CREACIÓN ORDEN DIAGNÓSTICA\n");
     }
 }
